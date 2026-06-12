@@ -4,153 +4,215 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tizimli Tahlil Testi</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07090f;--s1:#0f1420;--s2:#161d2e;--s3:#1e2840;--border:rgba(255,255,255,0.07);--accent:#6366f1;--accent2:#8b5cf6;--green:#10b981;--red:#f43f5e;--yellow:#f59e0b;--cyan:#06b6d4;--text:#f0f4ff;--muted:#94a3b8;--muted2:#64748b;}
+:root{
+  --bg:#060810;--s1:#0d1117;--s2:#151b26;--s3:#1c2333;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --accent:#7c6af7;--accent2:#a78bfa;--accent3:#5b4fe0;
+  --green:#22c55e;--red:#f43f5e;--yellow:#f59e0b;--cyan:#22d3ee;--orange:#fb923c;
+  --text:#eef2ff;--muted:#8898b0;--muted2:#4a5568;
+  --card-shadow:0 4px 24px rgba(0,0,0,0.4);
+}
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(99,102,241,0.12),transparent);pointer-events:none;z-index:0}
-.app{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:20px 16px 80px}
-.hdr{text-align:center;padding:28px 0 20px}
-.hdr-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);border-radius:20px;padding:5px 14px;margin-bottom:14px}
-.hdr h1{font-family:'Syne',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:800;background:linear-gradient(135deg,#f0f4ff 20%,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-.hdr p{color:var(--muted);font-size:13px}
-.tabs{display:flex;gap:4px;background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:4px;margin-bottom:14px}
-.tab{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;color:var(--muted);transition:all .2s;font-family:'Syne',sans-serif;position:relative}
-.tab.active{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(99,102,241,.35)}
-.tab-badge{position:absolute;top:-6px;right:-4px;background:var(--red);color:#fff;font-size:10px;font-weight:700;border-radius:8px;padding:1px 5px;min-width:18px;text-align:center;display:none}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
-.stat{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center}
-.stat-n{font-family:'Syne',sans-serif;font-size:24px;font-weight:700}
-.stat-l{font-size:11px;color:var(--muted2);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
-.c-blue{color:#818cf8}.c-green{color:var(--green)}.c-red{color:var(--red)}.c-yellow{color:var(--yellow)}
-.prog-wrap{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:12px}
-.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.prog-lbl{font-size:12px;color:var(--muted)}
-.prog-pct{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--accent)}
-.prog-bar{background:rgba(255,255,255,.05);border-radius:6px;height:5px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1)}
-.mavzu-wrap{margin-bottom:12px}
-.mavzu-lbl{font-size:11px;color:var(--muted2);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;font-weight:600}
-.mavzu-btns{display:flex;gap:8px;flex-wrap:wrap}
-.mavzu-btn{padding:7px 16px;border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:12px;font-weight:600;background:var(--s1);color:var(--muted);transition:all .2s;font-family:'Syne',sans-serif;position:relative}
-.mavzu-btn:hover{border-color:var(--accent);color:var(--accent)}
-.mavzu-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
-.m-badge{position:absolute;top:-5px;right:-5px;background:var(--green);color:#fff;font-size:9px;font-weight:700;border-radius:6px;padding:1px 4px}
-.qnav-wrap{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:12px}
-.qnav-lbl{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;font-weight:600}
-.qnav-dots{display:flex;flex-wrap:wrap;gap:5px}
-.qnav-dot{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.04);color:var(--muted2);border:1px solid transparent;flex-shrink:0}
-.qnav-dot:hover{border-color:var(--accent);color:var(--accent)}
-.qnav-dot.done-ok{background:rgba(16,185,129,.18)!important;color:var(--green)!important;border-color:rgba(16,185,129,.35)!important}
-.qnav-dot.done-no{background:rgba(244,63,94,.18)!important;color:var(--red)!important;border-color:rgba(244,63,94,.35)!important}
-.qnav-dot.current{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important;transform:scale(1.12)}
-.cd-wrap{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:12px}
-.cd-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.cd-lbl{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
-.cd-time{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);transition:color .3s}
+body::before{content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 100% 50% at 20% -10%,rgba(124,106,247,0.07),transparent 60%),
+    radial-gradient(ellipse 80% 60% at 80% 110%,rgba(34,211,238,0.04),transparent 60%);
+  pointer-events:none;z-index:0}
+
+.app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:24px 16px 100px}
+
+/* ── Header ── */
+.hdr{text-align:center;padding:32px 0 24px}
+.hdr-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.18);border-radius:999px;padding:6px 16px;margin-bottom:16px}
+.hdr h1{font-family:'Syne',sans-serif;font-size:clamp(24px,5vw,42px);font-weight:800;line-height:1.1;background:linear-gradient(140deg,#eef2ff 25%,var(--accent2) 75%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.hdr-sub{color:var(--muted);font-size:13.5px;letter-spacing:.2px}
+
+/* ── Tabs ── */
+.tabs{display:flex;gap:3px;background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:4px;margin-bottom:16px}
+.tab{flex:1;padding:10px 8px;text-align:center;font-size:13px;font-weight:700;border-radius:12px;cursor:pointer;color:var(--muted);transition:all .22s;font-family:'Syne',sans-serif;position:relative;letter-spacing:.3px}
+.tab.active{background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;box-shadow:0 3px 14px rgba(124,106,247,.4)}
+.tab-badge{position:absolute;top:-7px;right:-3px;background:var(--red);color:#fff;font-size:9.5px;font-weight:800;border-radius:99px;padding:2px 6px;min-width:18px;text-align:center;display:none;border:1.5px solid var(--bg);font-family:'Syne',sans-serif}
+
+/* ── Stats grid ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:14px 8px;text-align:center;transition:border-color .2s}
+.stat:hover{border-color:var(--border2)}
+.stat-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;line-height:1}
+.stat-l{font-size:10.5px;color:var(--muted2);margin-top:4px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.c-blue{color:var(--accent2)}.c-green{color:var(--green)}.c-red{color:var(--red)}.c-yellow{color:var(--yellow)}
+
+/* ── Countdown ── */
+.cd-wrap{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:13px 18px;margin-bottom:14px}
+.cd-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.cd-lbl{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;font-weight:500}
+.cd-time{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--cyan);letter-spacing:1px;transition:color .3s}
 .cd-time.warn{color:var(--yellow)}
-.cd-time.danger{color:var(--red);animation:pulse .8s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.cd-bar{height:5px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden}
-.cd-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .9s linear,background .5s}
-.cd-fill.warn{background:linear-gradient(90deg,var(--yellow),#fb923c)}
-.cd-fill.danger{background:linear-gradient(90deg,var(--red),#fb923c)}
-.streak-wrap{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;min-height:12px}
-.s-dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.07)}
+.cd-time.danger{color:var(--red);animation:blinkpulse .7s infinite}
+@keyframes blinkpulse{0%,100%{opacity:1}50%{opacity:.35}}
+.cd-bar{height:5px;background:rgba(255,255,255,.04);border-radius:4px;overflow:hidden}
+.cd-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .95s linear,background .5s}
+.cd-fill.warn{background:linear-gradient(90deg,var(--yellow),var(--orange))}
+.cd-fill.danger{background:linear-gradient(90deg,var(--red),var(--orange))}
+
+/* ── Progress ── */
+.prog-wrap{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:13px 18px;margin-bottom:14px}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.prog-lbl{font-size:12px;color:var(--muted);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:75%}
+.prog-pct{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--accent2)}
+.prog-bar{background:rgba(255,255,255,.04);border-radius:6px;height:6px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent3),var(--accent2));border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* ── Mavzu buttons ── */
+.mavzu-wrap{margin-bottom:14px}
+.mavzu-label{font-size:11px;color:var(--muted2);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px;font-weight:700}
+.mavzu-btns{display:flex;gap:8px;flex-wrap:wrap}
+.mavzu-btn{padding:8px 18px;border:1px solid var(--border);border-radius:12px;cursor:pointer;font-size:12.5px;font-weight:700;background:var(--s1);color:var(--muted);transition:all .2s;font-family:'Syne',sans-serif;position:relative;letter-spacing:.3px}
+.mavzu-btn:hover{border-color:var(--accent);color:var(--accent2);background:rgba(124,106,247,.07)}
+.mavzu-btn.active{background:linear-gradient(135deg,var(--accent3),var(--accent));border-color:transparent;color:#fff;box-shadow:0 3px 12px rgba(124,106,247,.35)}
+.m-badge{position:absolute;top:-6px;right:-6px;background:var(--green);color:#fff;font-size:9px;font-weight:800;border-radius:7px;padding:1px 5px;border:1.5px solid var(--bg)}
+
+/* ── Q-nav dots ── */
+.qnav-wrap{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:13px 16px;margin-bottom:14px}
+.qnav-lbl{font-size:10.5px;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:9px;font-weight:700}
+.qnav-dots{display:flex;flex-wrap:wrap;gap:4px}
+.qnav-dot{width:29px;height:29px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;transition:all .18s;background:rgba(255,255,255,.03);color:var(--muted2);border:1px solid transparent;flex-shrink:0}
+.qnav-dot:hover{border-color:var(--accent);color:var(--accent2)}
+.qnav-dot.done-ok{background:rgba(34,197,94,.15)!important;color:var(--green)!important;border-color:rgba(34,197,94,.3)!important}
+.qnav-dot.done-no{background:rgba(244,63,94,.15)!important;color:var(--red)!important;border-color:rgba(244,63,94,.3)!important}
+.qnav-dot.current{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(124,106,247,.25);transform:scale(1.1)}
+
+/* ── Streak ── */
+.streak-wrap{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;min-height:14px}
+.s-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.05)}
 .s-dot.ok{background:var(--green)}
 .s-dot.no{background:var(--red)}
-.q-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:24px;animation:slideUp .3s ease}
-@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.q-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.q-topic{font-size:11px;font-weight:600;color:var(--accent);background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.2);padding:4px 12px;border-radius:8px;letter-spacing:.5px;text-transform:uppercase}
-.q-num{font-family:'Syne',sans-serif;font-size:13px;color:var(--muted2);font-weight:600}
-.q-text{font-size:15px;font-weight:500;color:var(--text);margin-bottom:18px;line-height:1.65;padding:14px 16px;background:var(--s2);border-radius:12px;border-left:3px solid var(--accent)}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{padding:12px 15px;border:1px solid var(--border);border-radius:12px;cursor:pointer;font-size:14px;background:var(--s2);color:var(--muted);text-align:left;transition:all .18s;display:flex;align-items:flex-start;gap:11px;line-height:1.5}
-.opt-ltr{width:27px;height:27px;border-radius:7px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;flex-shrink:0;color:var(--muted2);transition:all .18s;margin-top:1px}
-.opt:hover:not(:disabled){border-color:var(--accent);background:rgba(99,102,241,.08);color:var(--text)}
+
+/* ── Question Card ── */
+.q-card{background:var(--s1);border:1px solid var(--border);border-radius:22px;padding:26px;animation:slideUp .28s ease;box-shadow:var(--card-shadow)}
+@keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.q-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:8px}
+.q-topic{font-size:11px;font-weight:700;color:var(--accent2);background:rgba(124,106,247,.1);border:1px solid rgba(124,106,247,.2);padding:4px 13px;border-radius:9px;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap}
+.q-num{font-family:'Syne',sans-serif;font-size:12.5px;color:var(--muted2);font-weight:700;white-space:nowrap}
+.q-text{font-size:15.5px;font-weight:500;color:var(--text);margin-bottom:20px;line-height:1.7;padding:16px 18px;background:var(--s2);border-radius:14px;border-left:3px solid var(--accent)}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{padding:13px 16px;border:1px solid var(--border);border-radius:13px;cursor:pointer;font-size:14px;background:var(--s2);color:var(--muted);text-align:left;transition:all .16s;display:flex;align-items:flex-start;gap:12px;line-height:1.55;width:100%;font-family:'DM Sans',sans-serif}
+.opt-ltr{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;flex-shrink:0;color:var(--muted2);transition:all .16s;margin-top:1px}
+.opt:hover:not(:disabled){border-color:var(--accent);background:rgba(124,106,247,.07);color:var(--text);transform:translateX(2px)}
 .opt:hover:not(:disabled) .opt-ltr{background:var(--accent);color:#fff}
-.opt.correct{border-color:var(--green);background:rgba(16,185,129,.1);color:var(--green)}
+.opt.correct{border-color:var(--green);background:rgba(34,197,94,.1);color:var(--green)}
 .opt.correct .opt-ltr{background:var(--green);color:#fff}
-.opt.wrong{border-color:var(--red);background:rgba(244,63,94,.1);color:#fca5a5}
+.opt.wrong{border-color:var(--red);background:rgba(244,63,94,.09);color:#fca5a5}
 .opt.wrong .opt-ltr{background:var(--red);color:#fff}
-.opt.readonly-ok{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.07);color:var(--green);cursor:default}
-.opt.readonly-ok .opt-ltr{background:rgba(16,185,129,.4);color:#fff}
-.opt.readonly-no{border-color:rgba(244,63,94,.4);background:rgba(244,63,94,.07);color:#fca5a5;cursor:default}
-.opt.readonly-no .opt-ltr{background:rgba(244,63,94,.35);color:#fff}
+.opt.readonly-ok{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.07);color:var(--green);cursor:default}
+.opt.readonly-ok .opt-ltr{background:rgba(34,197,94,.4);color:#fff}
+.opt.readonly-no{border-color:rgba(244,63,94,.35);background:rgba(244,63,94,.07);color:#fca5a5;cursor:default}
+.opt.readonly-no .opt-ltr{background:rgba(244,63,94,.3);color:#fff}
 .opt:disabled{cursor:default}
-.fb{margin-top:13px;padding:11px 15px;border-radius:12px;font-size:14px;font-weight:500;display:none;align-items:center;gap:10px;animation:slideUp .25s ease}
+
+/* ── Feedback ── */
+.fb{margin-top:14px;padding:12px 16px;border-radius:13px;font-size:13.5px;font-weight:500;display:none;align-items:center;gap:11px;animation:slideUp .22s ease;line-height:1.5}
 .fb.show{display:flex}
-.fb.ok{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2)}
-.fb.no{background:rgba(244,63,94,.1);color:#fca5a5;border:1px solid rgba(244,63,94,.2)}
-.fb.viewed{background:rgba(100,116,139,.1);color:var(--muted);border:1px solid rgba(100,116,139,.2)}
-.q-footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px;flex-wrap:wrap}
-.flag-btn{padding:7px 13px;background:var(--s2);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:12px;color:var(--muted2);transition:all .2s;display:flex;align-items:center;gap:5px}
+.fb.ok{background:rgba(34,197,94,.09);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.fb.no{background:rgba(244,63,94,.09);color:#fca5a5;border:1px solid rgba(244,63,94,.2)}
+.fb.viewed{background:rgba(100,116,139,.08);color:var(--muted);border:1px solid rgba(100,116,139,.15)}
+
+/* ── Footer ── */
+.q-footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:10px;flex-wrap:wrap}
+.flag-btn{padding:8px 14px;background:var(--s2);border:1px solid var(--border);border-radius:11px;cursor:pointer;font-size:12px;color:var(--muted2);transition:all .2s;display:flex;align-items:center;gap:6px;font-family:'DM Sans',sans-serif;font-weight:600}
 .flag-btn:hover{border-color:var(--yellow);color:var(--yellow)}
-.flag-btn.flagged{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--yellow)}
-.next-btn{padding:10px 26px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Syne',sans-serif;transition:opacity .2s;display:none}
-.next-btn:hover{opacity:.88}
-.continue-btn{padding:10px 22px;background:rgba(99,102,241,.15);color:var(--accent);border:1px solid rgba(99,102,241,.3);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Syne',sans-serif;display:none}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.modal{background:var(--s1);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px 24px;max-width:420px;width:92%;animation:slideUp .3s ease;text-align:center}
-.modal h2{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;margin-bottom:6px}
-.modal p{color:var(--muted);font-size:13px;margin-bottom:20px;line-height:1.65}
-.time-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.time-opt{padding:13px 18px;border:1px solid var(--border);border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;background:var(--s2);color:var(--muted);transition:all .2s;display:flex;align-items:center;justify-content:space-between;font-family:'Syne',sans-serif}
-.time-opt:hover{border-color:var(--accent);color:var(--text);background:rgba(99,102,241,.1)}
+.flag-btn.flagged{background:rgba(245,158,11,.09);border-color:rgba(245,158,11,.25);color:var(--yellow)}
+.next-btn{padding:11px 28px;background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border:none;border-radius:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;transition:opacity .2s,transform .15s;display:none;letter-spacing:.3px}
+.next-btn:hover{opacity:.88;transform:translateY(-1px)}
+.continue-btn{padding:11px 22px;background:rgba(124,106,247,.12);color:var(--accent2);border:1px solid rgba(124,106,247,.25);border-radius:13px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;display:none}
+
+/* ── Done card ── */
+.done-card{background:var(--s1);border:1px solid var(--border);border-radius:22px;padding:40px 28px;text-align:center;animation:slideUp .35s ease;box-shadow:var(--card-shadow)}
+.done-ring{width:130px;height:130px;margin:0 auto 22px;position:relative}
+.done-ring svg{transform:rotate(-90deg)}
+.done-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:28px;font-weight:800}
+.done-badge{display:inline-block;padding:6px 20px;border-radius:999px;font-size:13.5px;font-weight:700;margin-bottom:12px;font-family:'Syne',sans-serif;letter-spacing:.3px}
+.done-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px}
+.done-sub{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.65}
+.done-acts{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+
+/* ── Buttons ── */
+.btn-sec{padding:11px 20px;border:1px solid var(--border2);background:var(--s2);color:var(--text);border-radius:13px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Syne',sans-serif;transition:all .2s}
+.btn-sec:hover{border-color:var(--accent);color:var(--accent2)}
+.btn-pri{padding:11px 22px;background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border:none;border-radius:13px;cursor:pointer;font-size:13px;font-weight:800;font-family:'Syne',sans-serif;letter-spacing:.3px;transition:opacity .2s}
+.btn-pri:hover{opacity:.86}
+.btn-warn{padding:11px 20px;background:rgba(244,63,94,.1);color:var(--red);border:1px solid rgba(244,63,94,.22);border-radius:13px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Syne',sans-serif}
+
+/* ── Timeup card ── */
+.timeup-card{background:var(--s1);border:1px solid rgba(244,63,94,.25);border-radius:22px;padding:44px 28px;text-align:center;animation:slideUp .35s ease;box-shadow:var(--card-shadow)}
+
+/* ── Welcome card ── */
+.welcome{background:var(--s1);border:1px solid var(--border);border-radius:22px;padding:52px 32px;text-align:center;box-shadow:var(--card-shadow)}
+.welcome-ico{font-size:54px;margin-bottom:18px;display:block}
+.welcome-h{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px}
+.welcome-p{color:var(--muted);font-size:14px;line-height:1.75;max-width:380px;margin:0 auto}
+
+/* ── Time modal ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.modal{background:var(--s1);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:32px 26px;max-width:430px;width:93%;animation:slideUp .28s ease;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.modal h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px}
+.modal p{color:var(--muted);font-size:13.5px;margin-bottom:22px;line-height:1.7}
+.time-options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.time-opt{padding:14px 20px;border:1px solid var(--border2);border-radius:13px;cursor:pointer;font-size:14px;font-weight:700;background:var(--s2);color:var(--muted);transition:all .2s;display:flex;align-items:center;justify-content:space-between;font-family:'Syne',sans-serif}
+.time-opt:hover{border-color:var(--accent);color:var(--text);background:rgba(124,106,247,.09)}
 .time-opt .td{font-size:12px;color:var(--muted2);font-weight:400;font-family:'DM Sans',sans-serif}
 .custom-row{display:flex;gap:8px}
-.custom-row input{flex:1;padding:10px 14px;background:var(--s2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:'Syne',sans-serif;font-weight:600;text-align:center;outline:none}
-.custom-row input:focus{border-color:var(--accent)}
-.custom-row button{padding:10px 18px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Syne',sans-serif}
-.done-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:32px 24px;text-align:center;animation:slideUp .4s ease}
-.done-ring{width:120px;height:120px;margin:0 auto 18px;position:relative}
-.done-ring svg{transform:rotate(-90deg)}
-.done-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:26px;font-weight:800}
-.done-badge{display:inline-block;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:10px;font-family:'Syne',sans-serif}
-.done-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:5px}
-.done-sub{color:var(--muted);font-size:14px;margin-bottom:18px}
-.done-acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.btn-sec{padding:10px 18px;border:1px solid var(--border);background:var(--s2);color:var(--text);border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Syne',sans-serif;transition:all .2s}
-.btn-sec:hover{border-color:var(--accent);color:var(--accent)}
-.btn-pri{padding:10px 18px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:12px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Syne',sans-serif}
-.btn-pri:hover{opacity:.85}
-.btn-warn{padding:10px 18px;background:rgba(244,63,94,.12);color:var(--red);border:1px solid rgba(244,63,94,.25);border-radius:12px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Syne',sans-serif}
-.timeup-card{background:var(--s1);border:1px solid rgba(244,63,94,.3);border-radius:20px;padding:36px 24px;text-align:center;animation:slideUp .4s ease}
-.welcome{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:40px;text-align:center}
-.welcome-ico{font-size:48px;margin-bottom:14px}
-.welcome-h{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px}
-.welcome-p{color:var(--muted);font-size:14px;line-height:1.7}
-.missed-empty{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:40px;text-align:center;color:var(--muted)}
-.missed-list{display:flex;flex-direction:column;gap:8px}
-.missed-item{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:13px 15px;display:flex;align-items:flex-start;gap:11px;transition:border-color .2s}
-.missed-item:hover{border-color:var(--red)}
-.missed-q{font-size:14px;color:var(--muted);line-height:1.5}
-.missed-meta{font-size:11px;color:var(--muted2);margin-top:3px}
-.missed-actions{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--s3);border:1px solid var(--border);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--text);z-index:999;transition:transform .3s ease;white-space:nowrap}
+.custom-row input{flex:1;padding:11px 16px;background:var(--s2);border:1px solid var(--border2);border-radius:12px;color:var(--text);font-size:16px;font-family:'Syne',sans-serif;font-weight:700;text-align:center;outline:none;-webkit-appearance:none}
+.custom-row input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,106,247,.15)}
+.custom-row button{padding:11px 20px;background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border:none;border-radius:12px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Syne',sans-serif}
+
+/* ── Missed tab ── */
+.missed-empty{background:var(--s1);border:1px solid var(--border);border-radius:22px;padding:52px;text-align:center;color:var(--muted);box-shadow:var(--card-shadow)}
+.missed-list{display:flex;flex-direction:column;gap:9px}
+.missed-item{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;transition:border-color .2s}
+.missed-item:hover{border-color:rgba(244,63,94,.3)}
+.missed-q{font-size:14px;color:var(--muted);line-height:1.55}
+.missed-meta{font-size:11px;color:var(--muted2);margin-top:4px;font-weight:600}
+.missed-actions{display:flex;gap:9px;margin-bottom:14px;flex-wrap:wrap}
+
+/* ── Toast ── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--s3);border:1px solid var(--border2);border-radius:14px;padding:11px 22px;font-size:13px;color:var(--text);z-index:999;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);font-weight:600}
 .toast.show{transform:translateX(-50%) translateY(0)}
-@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}.stat-n{font-size:20px}.q-text{font-size:14px}.qnav-dot{width:24px;height:24px;font-size:10px}}
+
+/* ── Responsive ── */
+@media(max-width:520px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat-n{font-size:22px}
+  .q-text{font-size:14px}
+  .qnav-dot{width:25px;height:25px;font-size:10px;border-radius:6px}
+  .q-card{padding:18px}
+  .done-card{padding:28px 18px}
+}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="hdr">
-    <div class="hdr-tag">📊 Tizimli Tahlil</div>
+    <div class="hdr-eyebrow">🎓 Tizimli Tahlil</div>
     <h1>Tizimli Tahlil Testi</h1>
-    <p>153 savol · 3 mavzu · Vaqt chegarasi · Progress saqlanadi</p>
+    <p class="hdr-sub">108 savol &middot; 2 mavzu &middot; 54 tadan &middot; Vaqt chegarali &middot; Progress saqlanadi</p>
   </div>
+
   <div class="tabs">
     <div class="tab active" onclick="switchTab('test')" id="tab-test">📝 Test</div>
     <div class="tab" onclick="switchTab('missed')" id="tab-missed">❌ O'tilmaganlar<span class="tab-badge" id="missed-badge">0</span></div>
   </div>
+
   <div class="stats">
     <div class="stat"><div class="stat-n c-blue" id="sTotal">0</div><div class="stat-l">Jami</div></div>
     <div class="stat"><div class="stat-n c-green" id="sCorrect">0</div><div class="stat-l">To'g'ri</div></div>
     <div class="stat"><div class="stat-n c-red" id="sWrong">0</div><div class="stat-l">Noto'g'ri</div></div>
     <div class="stat"><div class="stat-n c-yellow" id="sPct">—</div><div class="stat-l">Natija</div></div>
   </div>
+
   <div class="cd-wrap" id="cdWrap" style="display:none">
     <div class="cd-row">
       <div class="cd-lbl">⏳ Qolgan vaqt</div>
@@ -158,6 +220,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div class="cd-bar"><div class="cd-fill" id="cdFill" style="width:100%"></div></div>
   </div>
+
   <div class="prog-wrap" id="progWrap" style="display:none">
     <div class="prog-top">
       <span class="prog-lbl" id="progLbl">—</span>
@@ -165,363 +228,331 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
   </div>
+
   <div class="mavzu-wrap">
-    <div class="mavzu-lbl">Mavzu tanlash</div>
+    <div class="mavzu-label">Mavzu tanlash</div>
     <div class="mavzu-btns" id="mavzuBtns"></div>
   </div>
+
   <div class="qnav-wrap" id="qnavWrap" style="display:none">
-    <div class="qnav-lbl">Savollar</div>
+    <div class="qnav-lbl">Savollar navigatsiyasi</div>
     <div class="qnav-dots" id="qnavDots"></div>
   </div>
+
   <div class="streak-wrap" id="streakWrap"></div>
+
   <div id="testArea">
     <div class="welcome">
-      <div class="welcome-ico">📊</div>
+      <span class="welcome-ico">🧠</span>
       <div class="welcome-h">Mavzu tanlang</div>
-      <div class="welcome-p">Mavzu tanlagach vaqt belgilaysiz.<br>Savol raqamlariga bosib istalgan savolga o'tish mumkin.<br>Allaqachon javob berilgan savollarda faqat natija ko'rsatiladi.</div>
+      <div class="welcome-p">Mavzuni tanlang, so'ng vaqt belgilang.<br>Savollar aralashtiriladi. Raqamlarga bosib istalgan savolga o'tish mumkin. Allaqachon javob berilgan savollar ko'rib chiqish rejimida ko'rsatiladi.</div>
     </div>
   </div>
   <div id="missedArea" style="display:none"></div>
 </div>
+
+<!-- Time Modal -->
 <div class="modal-overlay" id="timeModal" style="display:none" onclick="modalOutside(event)">
   <div class="modal">
     <h2>⏱️ Vaqtni tanlang</h2>
-    <p id="timeModalDesc">Vaqt tugasa test yopiladi va boshidan boshlanadi.</p>
+    <p id="timeModalDesc">Vaqt tugasa test boshidan boshlanadi.</p>
     <div class="time-options">
       <div class="time-opt" onclick="pickTime(5)"><span>5 daqiqa</span><span class="td">Tez tekshirish</span></div>
       <div class="time-opt" onclick="pickTime(10)"><span>10 daqiqa</span><span class="td">O'rtacha sur'at</span></div>
       <div class="time-opt" onclick="pickTime(15)"><span>15 daqiqa</span><span class="td">Yaxshi o'ylash</span></div>
       <div class="time-opt" onclick="pickTime(20)"><span>20 daqiqa</span><span class="td">Bemalol</span></div>
-      <div class="time-opt" onclick="pickTime(30)"><span>30 daqiqa</span><span class="td">Batafsil yondashuv</span></div>
+      <div class="time-opt" onclick="pickTime(30)"><span>30 daqiqa</span><span class="td">Batafsil</span></div>
     </div>
     <div class="custom-row">
-      <input type="number" id="customMin" placeholder="Daqiqa" min="1" max="120">
+      <input type="number" id="customMin" placeholder="Daqiqa" min="1" max="180">
       <button onclick="pickCustom()">OK</button>
     </div>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
+
 <script>
-const MAVZULAR=[
-  {id:1,name:"1-mavzu",full:"Tizimli tahlil asoslari (1–51)"},
-  {id:2,name:"2-mavzu",full:"Tizim tuzilishi va modellashtirish (52–102)"},
-  {id:3,name:"3-mavzu",full:"Risk, noaniqlik, GIS va DSS (103–153)"}
+// ── DATA ──
+const MAVZULAR = [
+  {id:1, name:"1-mavzu", full:"1-mavzu: Tizimli tahlil asoslari (1–54)"},
+  {id:2, name:"2-mavzu", full:"2-mavzu: Tizim xususiyatlari va metodlar (55–108)"}
 ];
 
-const RAW=[
-// ── MAVZU 1: Tizimli tahlil asoslari (1–51) ──
-{id:1,m:1,q:"Tizimli tahlil nimani o'rganadi?",o:["Murakkab tizimlarni kompleks o'rganish va boshqarishni","Faqat matematik formulalarni","Alohida elementlarni mustaqil tahlil qilishni","Statistik ma'lumotlarni yig'ishni"],a:0},
-{id:2,m:1,q:"Zamonaviy dunyoda murakkablikning ortishiga nima sabab bo'lmoqda?",o:["Globallashuv va omillarning o'zaro ta'siri","Axborot yetishmasligi","Texnologik rivojlanishning to'xtashi","Boshqaruvning soddalashuvi"],a:0},
-{id:3,m:1,q:"Iqtisodiy jarayonlar qanday tizim sifatida qaraladi?",o:["O'zaro bog'liq murakkab tizim","Mustaqil va yopiq tizim","Faqat mahalliy tizim","Tasodifiy jarayonlar yig'indisi"],a:0},
-{id:4,m:1,q:"Tizimli yondashuv nima uchun zarur?",o:["An'anaviy yondashuvlar murakkab muammolarni hal qila olmagani uchun","Hisob-kitoblarni kamaytirish uchun","Nazariyani inkor qilish uchun","Muammolarni soddalashtirish uchun"],a:0},
-{id:5,m:1,q:"Tizimli tahlil jarayonining birinchi bosqichi qaysi?",o:["Muammoni aniqlash","Optimal yechimni tanlash","Natijalarni baholash","Modellash"],a:0},
-{id:6,m:1,q:"Umumiy tizim nazariyasi asoschisi kim?",o:["Ludwig von Bertalanffy","Norbert Viner","Isaac Newton","Alan Turing"],a:0},
-{id:7,m:1,q:"Kibernetika nazariyasini kim ishlab chiqqan?",o:["Norbert Viner","Ludwig von Bertalanffy","John von Neumann","Adam Smith"],a:0},
-{id:8,m:1,q:"Tizimli tahlil qaysi yillarda mustaqil fan sifatida tan olingan?",o:["1970-yillarda","1940-yillarda","1950-yillarda","1980-yillarda"],a:0},
-{id:9,m:1,q:"Tizimli tahlilning predmeti nimani qamrab oladi?",o:["Tuzilma, funksiyalar, rivojlanish va boshqaruvni","Faqat matematik modellarni","Faqat ijtimoiy jarayonlarni","Faqat texnik tizimlarni"],a:0},
-{id:10,m:1,q:"Quyidagilardan qaysi biri tizimli tahlilning tadqiqot ob'ekti hisoblanadi?",o:["Texnik, iqtisodiy, ijtimoiy va ekologik tizimlar","Faqat texnik qurilmalar","Faqat iqtisodiy ko'rsatkichlar","Faqat tabiiy hodisalar"],a:0},
-{id:11,m:1,q:"Teskari aloqa nimani anglatadi?",o:["Natijaning sababga ta'sirini","Tashqi muhitning tizimga ta'sirini","Elementlarning mustaqilligini","Tizimning yopiq bo'lishini"],a:0},
-{id:12,m:1,q:"Tizimli tahlilning asosiy maqsadi nima?",o:["Murakkab muammolarni oqilona hal qilish","Nazariy bilimlarni yodlash","Statistik ma'lumotlarni yig'ish","Hisobot tayyorlash"],a:0},
-{id:13,m:1,q:"Tizimli tahlilning asosiy vazifalaridan biri qaysi?",o:["Matematikmodellashtirish","Ma'lumotlarni chop etish","Faqat kuzatish","Tasodifiy tahlil"],a:0},
-{id:14,m:1,q:"Tizimli tahlilda turli nuqtai nazarlar nima uchun muhim?",o:["Eng samarali yechimni topish uchun","Qaror qabul qilishni kechiktirish uchun","Muammoni murakkablashtirish uchun","Faqat nazariy bahs yuritish uchun"],a:0},
-{id:15,m:1,q:"Tizimli tahlil qaysi sohalarda keng qo'llaniladi?",o:["Iqtisodiyot, menejment, muhandislik va IT sohalarida","Faqat ta'lim sohasida","Faqat ekologiyada","Faqat harbiy sohada"],a:0},
-{id:16,m:1,q:"Tizimli tahlil fani nimani o'rganadi?",o:["Murakkab tizimlar va fanlararo muammolarni tadqiq etish metodologiyasini","Faqat matematik tenglamalarni","Alohida obyektlarni mustaqil o'rganishni","Statistik ma'lumotlarni yig'ishni"],a:0},
-{id:17,m:1,q:"Tizimli tahlil qaysi fan bilan deyarli teng yosh hisoblanadi?",o:["Kibernetika","Matematika","Fizika","Biologiya"],a:0},
-{id:18,m:1,q:"Tizim tushunchasi dastlab qayerda paydo bo'lgan?",o:["Qadimgi Yunonistonda","Qadimgi Rimda","O'rta asr Yevropasida","Yangi davr Amerikada"],a:0},
-{id:19,m:1,q:"Tizimli tahlilda asosiy yondashuvlar qaysilar?",o:["Formal va mazmuniy–tushunchaviy","Nazariy va amaliy","Induktiv va deduktiv","Analitik va statistik"],a:0},
-{id:20,m:1,q:"Tizimli tahlilning asosiy muammosi nimadan iborat?",o:["Obyektlar o'rtasidagi bog'lanishlarni boshqariladigan darajada o'rganishdan","Hisoblashlarni soddalashtirishdan","Tajribalarni kamaytirishdan","Nazariyani inkor etishdan"],a:0},
-{id:21,m:1,q:"Tizimli tahlil fanining predmeti nima?",o:["Tizimli jarayonlarning va hodisalarning tizimli jihatlarini o'rganish","Faqat texnik jarayonlarni tahlil qilish","Ijtimoiy munosabatlarni tavsiflash","Axborotlarni saqlash"],a:0},
-{id:22,m:1,q:"Quyidagilardan qaysi biri tizimli tahlil metodlariga kiradi?",o:["Tahlil va sintez","Yodlash va takrorlash","Nusxa ko'chirish","Oddiy kuzatish"],a:0},
-{id:23,m:1,q:"Tabiat va jamiyatdagi eng muhim intellektual resurs qaysi?",o:["Inson","Energiya","Modda","Makon"],a:0},
-{id:24,m:1,q:"Tizimli tafakkur nimaga yo'naltirilgan?",o:["Hodisa va jarayonlarni yaxlit tizim sifatida tushunish va boshqarishga","Alohida elementlarni ajratib o'rganishga","Faqat nazariy xulosalar chiqarishga","Tasodifiy jarayonlarni tahlil qilishga"],a:0},
-{id:25,m:1,q:"Tizim deganda nima tushuniladi?",o:["O'zaro bog'langan elementlar majmuasi","Tasodifiy obyektlar yig'indisi","Alohida hodisalar to'plami","Mustaqil elementlar guruhi"],a:0},
-{id:26,m:1,q:"Tizimlarning asosiy tasnifi qaysi belgiga ko'ra amalga oshiriladi?",o:["Kelib chiqishi va faoliyat sohasiga ko'ra","Hajmiga ko'ra","Rangiga ko'ra","Joylashuviga ko'ra"],a:0},
-{id:27,m:1,q:"Tabiiy tizimlarga qaysi biri misol bo'la oladi?",o:["Ekotizimlar","Kompyuter tarmoqlari","Bank tizimi","Ta'lim tizimi"],a:0},
-{id:28,m:1,q:"Sun'iy tizimlar qanday tizimlar hisoblanadi?",o:["Inson tomonidan yaratilgan tizimlar","Tabiatda o'z-o'zidan vujudga kelgan tizimlar","Ijtimoiy munosabatlarga asoslangan tizimlar","Biologik tizimlar"],a:0},
-{id:29,m:1,q:"Ijtimoiy tizimlarning asosiy elementi nima?",o:["Inson","Texnika","Energiya","Axborot"],a:0},
-{id:30,m:1,q:"Quyidagilardan qaysi biri sun'iy tizimga kiradi?",o:["Transport tizimi","Atmosfera","O'rmon ekotizimi","Daryo havzasi"],a:0},
-{id:31,m:1,q:"Tabiiy tizimlarning asosiy xususiyati nimada?",o:["Inson aralashuvisiz mavjud bo'lishida","Faqat boshqariladigan bo'lishida","Texnik qurilmalardan iboratligida","Sun'iy ravishda yaratilishida"],a:0},
-{id:32,m:1,q:"Ijtimoiy tizimlar nimaga asoslanadi?",o:["Ijtimoiy munosabatlarga","Fizik qonunlarga","Kimyoviy reaksiyalarga","Biologik jarayonlarga"],a:0},
-{id:33,m:1,q:"Murakkab tizimlarga xos bo'lgan belgi qaysi?",o:["Elementlar o'rtasidagi ko'p darajali bog'liqlik","Bitta elementdan iborat bo'lish","O'zgarishsiz qolish","Tashqi muhitdan uzilganlik"],a:0},
-{id:34,m:1,q:"Ochiq tizim deganda nima tushuniladi?",o:["Tashqi muhit bilan axborot va resurs almashadigan tizim","Faqat ichki aloqalarga ega tizim","Mustaqil ishlovchi tizim","Yopiq mexanik tizim"],a:0},
-{id:35,m:1,q:"Yopiq tizimning asosiy belgisi qaysi?",o:["Tashqi muhit bilan almashuvning cheklanganligi","Doimiy rivojlanishda bo'lishi","Inson tomonidan boshqarilishi","Ochiq muhitga ega bo'lishi"],a:0},
-{id:36,m:1,q:"Ijtimoiy tizimlarga qaysi soha kiradi?",o:["Ta'lim tizimi","Quyosh tizimi","Dvigatel mexanizmi","Elektr zanjiri"],a:0},
-{id:37,m:1,q:"Tizim elementlari orasidagi bog'lanish nima deb ataladi?",o:["Aloqa","Izolyatsiya","Tasodif","Ajralish"],a:0},
-{id:38,m:1,q:"Tizimlarning ierarxik tuzilishi nimani anglatadi?",o:["Pastki va yuqori darajali elementlarning mavjudligini","Elementlarning tengligini","Bog'lanishlarning yo'qligini","Tasodifiy joylashuvni"],a:0},
-{id:39,m:1,q:"Sun'iy tizimlarning asosiy maqsadi nima?",o:["Muayyan vazifani bajarish","Tabiiy muvozanatni saqlash","O'z-o'zidan rivojlanish","Biologik yashashni ta'minlash"],a:0},
-{id:40,m:1,q:"Tizimning tashqi muhitga moslashish xususiyati nima deb ataladi?",o:["Adaptatsiya","Izolyatsiya","Stabilizatsiya","Fragmentatsiya"],a:0},
-{id:41,m:1,q:"Tizimlarning tasnifi nimaga xizmat qiladi?",o:["Ularni o'rganish va boshqarishni osonlashtirishga","Tizimlarni murakkablashtirishga","Faqat nazariy ta'rif berishga","Amaliy ahamiyatini kamaytirishga"],a:0},
-{id:42,m:1,q:"Tizim strukturasi nima?",o:["Tizim elementlarining joylashuvi, bog'lanishi va ierarxiyasi","Tizimda bajariladigan barcha jarayonlar majmui","Faqat dasturiy modullar to'plami","Foydalanuvchi interfeysi"],a:0},
-{id:43,m:1,q:"Strukturaviy bog'lanish qanday bog'lanish hisoblanadi?",o:["Doimiy, barqaror va aniq belgilangan bog'lanish","Vaqtinchalik va o'zgaruvchan bog'lanish","Faqat ma'lumot almashinuvi","Tasodifiy aloqa"],a:0},
-{id:44,m:1,q:"Funksional bog'lanish nimani ifodalaydi?",o:["Elementlar vazifalari orqali yuzaga keladigan o'zaro ta'sir","Elementlarning fizik joylashuvi","Tizimning tashqi ko'rinishi","Qurilmalarning texnik tavsifi"],a:0},
-{id:45,m:1,q:"Qaysi biri strukturaviy bog'lanishga misol bo'la oladi?",o:["Protsessor, xotira va anakart o'rtasidagi bog'lanish","Funksiyalar chaqirilishi","Ma'lumotlarni qayta ishlash jarayoni","Algoritm bajarilishi"],a:0},
-{id:46,m:1,q:"Funksional bog'lanishning asosiy xususiyati qaysi?",o:["Dinamik va o'zgaruvchan bo'lishi","Doimiy va o'zgarmas bo'lishi","Faqat apparatga bog'liq bo'lishi","Faqat tashqi muhit bilan bog'liq bo'lishi"],a:0},
-{id:47,m:1,q:"Strukturaviy model nimani ko'rsatadi?",o:["Tizimning statik tuzilishini","Tizimning ishlash tezligini","Foydalanuvchi faoliyatini","Algoritmlar ketma-ketligini"],a:0},
-{id:48,m:1,q:"Funksional model nimani aks ettiradi?",o:["Jarayonlar, operatsiyalar va vazifalar ketma-ketligini","Elementlarning fizik joylashuvini","Qurilmalarning tashqi ko'rinishini","Tizim hujjatlarini"],a:0},
-{id:49,m:1,q:"Ma'lumotlar bazasida jadvallar o'rtasidagi birlamchi va tashqi kalitlar nima hisoblanadi?",o:["Strukturaviy bog'lanish","Funksional bog'lanish","Tasodifiy bog'lanish","Foydalanuvchi bog'lanishi"],a:0},
-{id:50,m:1,q:"Strukturaviy bog'lanishning muhimligi nimada?",o:["Tizim barqarorligi va ishonchliligini ta'minlashida","Tizim dizaynini bezashda","Faqat tezlikni oshirishda","Foydalanuvchi sonini ko'paytirishda"],a:0},
-{id:51,m:1,q:"Funksional bog'lanish tizimga nima beradi?",o:["Samarali ishlash va maqsadga erishishni","Faqat tashqi ko'rinishni","Statik holatni","Faqat apparat mosligini"],a:0},
+const RAW = [
+// ── MAVZU 1: 1–54 ──
+{id:1,m:1,q:"Tizimli tahlil nima?",o:["Murakkab obyektlarni tadqiq etish metodologiyasi","Matematik modellashtirish turi","Xodimlarni o'qitish usuli","Dasturiy ta'minotni ishlab chiqish usuli"],a:0},
+{id:2,m:1,q:"Tizimli tahlilning asosiy maqsadi:",o:["Murakkab tizimlarning ishlashini optimallashtirish","Xodimlarni boshqarish","Ma'lumotlarni saqlash","Kompyuterlar yaratish"],a:0},
+{id:3,m:1,q:"Tizim – bu:",o:["O'zaro bog'langan elementlar majmuasi bo'lib, yaxlitlikni tashkil etadi","Bog'lanishsiz bitta element","Dasturiy modul","Mustaqil elementlar yig'indisi"],a:0},
+{id:4,m:1,q:"Tizimning xususiyatlariga quyidagilardan qaysi biri kiradi?",o:["Tasodifiylik","Mos kelmaslik","Mustaqillik","Yaxlitlik"],a:0},
+{id:5,m:1,q:"Tizim elementi – bu:",o:["Tizimning eng kichik bo'linmaydigan qismi","Faqat apparat qismi","Faqat dasturiy qismi","Mustaqil jarayon"],a:0},
+{id:6,m:1,q:"Tizimli yondashuv nimaga asoslanadi?",o:["Tizimni yagona butun sifatida ko'rib chiqishga","O'zaro bog'liqliklarni e'tiborsiz qoldirishga","Faqat matematikadan foydalanishga","Alohida qismlarni o'rganishga"],a:0},
+{id:7,m:1,q:"Ochiq tizimga misol:",o:["Avtomobil","Izolyatsiyalangan termos","Tosh","Batareyasiz soat"],a:0},
+{id:8,m:1,q:"Yopiq tizimga misol:",o:["Germetik idish","Inson organizmi","Avtomobil","Tarmoqqa ulangan kompyuter"],a:0},
+{id:9,m:1,q:"Tizim iyerarxiyasi nimani anglatadi?",o:["Darajalar va bo'ysunishning mavjudligini","Boshqaruv darajalarining yo'qligini","Elementlarning tasodifiy birlashishini","Chiziqli joylashuvni"],a:0},
+{id:10,m:1,q:"Tizimli tahlilning asosiy bosqichlari:",o:["Maqsadni qo'yish, tahlil, sintez","Ishlab chiqarish, nazorat, sotish","Loyihalash, ekspluatatsiya, utilizatsiya","Kiritish, chiqarish, saqlash"],a:0},
+{id:11,m:1,q:"Tizimli tahlil qayerlarda qo'llaniladi?",o:["Murakkab obyektlar mavjud bo'lgan barcha sohalarda","Faqat IT sohasida","Faqat iqtisodiyotda","Faqat fizikada"],a:0},
+{id:12,m:1,q:"Tizim funksiyasi – bu:",o:["Tizim tomonidan bajariladigan harakat usuli","Tizimning ichki xususiyati","Alohida element","Kirish parametri"],a:0},
+{id:13,m:1,q:"Tizimning kirishi (input) nima hisoblanadi?",o:["Tizimga kelib tushadigan ma'lumotlar yoki resurslar","Ishning yakuniy natijasi","Chiqish parametrlari","Tizim modeli"],a:0},
+{id:14,m:1,q:"Tizimning chiqishi (output) nima hisoblanadi?",o:["Tizim ishining yakuniy natijasi","Tizimga kiruvchi resurslar","Boshqaruv signali","Tizim modeli"],a:0},
+{id:15,m:1,q:"Tizimdagi qayta aloqa (feedback) – bu:",o:["Chiqish haqidagi ma'lumotning kirishga qaytishi","Tashqi resurslar","Faqat boshqaruv signali","Tartibsiz reaksiya"],a:0},
+{id:16,m:1,q:"Kibernetik tizimga misol:",o:["Termostat","Tosh","Qog'oz kitob","Tog'"],a:0},
+{id:17,m:1,q:"Murakkab tizim – bu:",o:["Ko'p sonli o'zaro bog'langan elementlardan iborat tizim","Kam sonli elementlardan iborat tizim","Oddiy mashina","Sodda model"],a:0},
+{id:18,m:1,q:"Tizimli tahlil nima imkonini beradi?",o:["Murakkab obyektlarni tushunishni soddalashtirish","Tartibsizlikni oshirish","Elementlar sonini kamaytirish","Tizimni tasodifiy qilish"],a:0},
+{id:19,m:1,q:"Tizimning tashqi muhiti – bu:",o:["Tizimdan tashqarida bo'lib, unga ta'sir qiluvchi barcha omillar","Barcha quyi tizimlar yig'indisi","Faqat uskunalar","Faqat tizim foydalanuvchilari"],a:0},
+{id:20,m:1,q:"Tizimdagi sinergiya nimani anglatadi?",o:["Tizim samarasi uning qismlari samaralari yig'indisidan kattaroq bo'lishini","Umumiy samara qismlar yig'indisiga teng bo'lishini","O'zaro ta'sirning mavjud emasligini","Tizim samarasi qismlar yig'indisidan kichik bo'lishini"],a:0},
+{id:21,m:1,q:"Texnik tizimga misol:",o:["Avtomatlashtirilgan ishlab chiqarish liniyasi","Inson organizmi","Ekotizim","Ijtimoiy guruh"],a:0},
+{id:22,m:1,q:"Ijtimoiy tizimga misol:",o:["Talabalar jamoasi","Termostat","Avtomobil","Kompyuter"],a:0},
+{id:23,m:1,q:"Iqtisodiy tizim – bu:",o:["Iqtisodiy jarayonlar va ishtirokchilar majmui","Pul mablag'lari yig'indisi","Faqat korxonalar","Faqat banklar"],a:0},
+{id:24,m:1,q:"Tizimni boshqarish – bu:",o:["Maqsadlarga erishish uchun tizimga ta'sir ko'rsatish","Faqat nazorat qilish","Quyi tizimlarni yo'q qilish","Ta'sir ko'rsatmaslik"],a:0},
+{id:25,m:1,q:"Quyi tizim (podsistema) – bu:",o:["Mustaqil funksiyalarni bajaruvchi tizimning bir qismi","Tizimdan mustaqil qism","Kirish ma'lumotlari","Tizim modeli"],a:0},
+{id:26,m:1,q:"Tizimli tahlilning asosiy vazifasi:",o:["Murakkab vaziyatlarda qarorlarni asoslash va qabul qilish","Tizimlarni mexanik yig'ish","Ma'lumotlarni saqlash","Tasodifiy modellar yaratish"],a:0},
+{id:27,m:1,q:"Tizimning maqsadi – bu:",o:["Uning faoliyati yakuniy natijasi","Qayta aloqa","Elementlarning tasodifiy xatti-harakati","Faqat chiqish signali"],a:0},
+{id:28,m:1,q:"Tizimli yondashuvning paydo bo'lishiga nima sabab bo'lgan?",o:["Biologiya va kibernetikaning rivojlanishi","Elementar zarralar fizikasi","Faqat kompyuter fanlari","Faqat iqtisodiyot"],a:0},
+{id:29,m:1,q:"Kibernetika nimani o'rganadi?",o:["Tizimlardagi boshqaruv va aloqa qonunlarini","Tabiat qonunlarini","Faqat insonni","Faqat kompyuterlarni"],a:0},
+{id:30,m:1,q:'"Tizimning hayotiy sikli" nima?',o:["Tizimni yaratish, ishlatish va utilizatsiya qilish bosqichlari majmui","Tizimning ta'mirsiz ishlash vaqti","Bitta elementning mavjudlik muddati","Faqat ekspluatatsiya davri"],a:0},
+{id:31,m:1,q:'"Qora quti" usuli nimadan iborat?',o:["Tizimning ichki tuzilishini bilmasdan, kirish va chiqishlar orqali o'rganish","Faqat ichki jarayonlarni tahlil qilish","Barcha jarayonlarni to'liq ochib berish","Ish natijalarini e'tiborsiz qoldirish"],a:0},
+{id:32,m:1,q:"Qayta aloqali tizimga misol:",o:["Avtomatik harorat rostlagichi","Cho'g'lanma lampa","Kitob","Tosh"],a:0},
+{id:33,m:1,q:"Murakkab tizimlar odatda:",o:["Noaniqlik va ehtimollik xususiyatlariga ega bo'ladi","Dasturiy ta'minotni ishlab chiqish usuli hisoblanadi","Quyi tizimlarga ega bo'lmaydi","Har doim yopiq bo'ladi"],a:0},
+{id:34,m:1,q:"Tizimli tahlilda optimallashtirish nimani anglatadi?",o:["Mumkin bo'lgan variantlardan eng oqilona yechimni tanlash","Eng yomon variantni tanlash","Tahlilsiz modelni soddalashtirish","Mezonlarni e'tiborsiz qoldirish"],a:0},
+{id:35,m:1,q:"Quyidagilardan qaysi biri tizim xususiyatlariga kirmaydi?",o:["Qonuniyatsiz tasodifiylik","Yaxlitlik","O'zaro bog'liqlik","Iyerarxiklik"],a:0},
+{id:36,m:1,q:"Biologik tizimga misol:",o:["Inson organizmi","Zavod","Elektron qurilma","Dastur"],a:0},
+{id:37,m:1,q:"Tizim modelining asosiy vazifasi:",o:["Tahlil va prognozlash uchun soddalashtirilgan tavsif berish","Haqiqatni murakkablashtirish","Faqat kirishlarni aks ettirish","Xususiyatlarni e'tiborsiz qoldirish"],a:0},
+{id:38,m:1,q:"Tizimli fikrlash nimani nazarda tutadi?",o:["O'zaro bog'liqliklar, muhit va maqsadlarni hisobga olishni","Obyektni alohida holda ko'rib chiqishni","Qarorlarni tasodifiy tanlashni","Tashqi muhitni e'tiborsiz qoldirishni"],a:0},
+{id:39,m:1,q:"Tizimning asosiy belgisi nima?",o:["Elementlarning o'zaro bog'liqligi va ta'siri","Elementlarning mustaqilligi","Maqsadning yo'qligi","To'liq yakkalanish"],a:0},
+{id:40,m:1,q:"Tizim qachon barqaror hisoblanadi?",o:["Tashqi ta'sirlarda ham o'z xususiyatlarini saqlab qolsa","Tartibsiz reaksiya qilsa","Quyi tizimlarga ega bo'lmasa","Har doim izolyatsiyalangan bo'lsa"],a:0},
+{id:41,m:1,q:"Tizimdagi integratsiya nimani anglatadi?",o:["Maqsadga erishish uchun elementlarni birlashtirishni","Elementlarni ajratishni","Tasodifiy xatti-harakatni","Quyi tizimlarni yo'q qilishni"],a:0},
+{id:42,m:1,q:"Murakkab tizimning asosiy tavsifi:",o:["Ko'plab elementlar va bog'lanishlarning mavjudligi","Tuzilishning soddaligi","Quyi tizimlarning mustaqilligi","Bog'lanishlarning yo'qligi"],a:0},
+{id:43,m:1,q:"Qanday tizimlar dinamik tizimlar deyiladi?",o:["Vaqt davomida o'zgaradigan tizimlar","O'zgarmaydigan tizimlar","Izolyatsiyalangan tizimlar","Chiqishlari bo'lmagan tizimlar"],a:0},
+{id:44,m:1,q:"Statik tizimga misol:",o:["Geometrik shakl","Kompyuter tarmog'i","Iqtisodiy model","Avtomobil"],a:0},
+{id:45,m:1,q:"Tizimni boshqarish funksiyalariga qaysi biri kiradi?",o:["Rejalashtirish, nazorat qilish, muvofiqlashtirish","Modellashtirish","Ma'lumotlarni saqlash","Faqat kuzatish"],a:0},
+{id:46,m:1,q:"Tizimli tahlil qachon qo'llaniladi?",o:["Noaniqlik mavjud bo'lgan murakkab qarorlarni qabul qilishda","Oddiy qarorlarni qabul qilishda","Faqat binolarni loyihalashda","Maishiy masalalarni hal qilishda"],a:0},
+{id:47,m:1,q:"To'g'ri aloqali tizim:",o:["Ish natijalaridan foydalanmaydi","Maqsadga ega emas","Chiqishlardan kirishlarni tuzatish uchun foydalanadi","Tasodifiy tuzilishga ega"],a:0},
+{id:48,m:1,q:"Tizimli tahlilning asosiy usullaridan biri:",o:["Dekompozitsiya va modellashtirish","Faqat intuitsiya","Tasodifiy prognozlash","Tizimni yo'q qilish"],a:0},
+{id:49,m:1,q:"Sun'iy tizimga misol:",o:["Zavod","Ko'l","Ekotizim","O'rmon"],a:0},
+{id:50,m:1,q:"Tabiiy tizimga misol:",o:["Inson organizmi","Kompyuter","Robot","Zavod"],a:0},
+{id:51,m:1,q:"Tizimli tahlilda modellashtirishning maqsadi:",o:["Tizimni soddalashtirilgan holda o'rganish","Obyektning to'liq nusxasini yaratish","Quyi tizimlarni yo'q qilish","Kirish ma'lumotlarini chiqarib tashlash"],a:0},
+{id:52,m:1,q:'"Qayta aloqali tizim" nimani anglatadi?',o:["O'z xatti-harakatini natijalarga qarab tuzatadigan tizimni","Chiqish ma'lumotlaridan foydalanmaydigan tizimni","Boshqaruv mavjud bo'lmagan tizimni","To'liq izolyatsiyalangan tizimni"],a:0},
+{id:53,m:1,q:"Optimallashtirish modeli nima?",o:["Eng yaxshi yechimni topish uchun mo'ljallangan model","Tasodifiy harakatlar modeli","Cheklovlarni e'tiborsiz qoldiruvchi model","Mezonsiz model"],a:0},
+{id:54,m:1,q:"Tizimli tahlilning asosiy prinsipi:",o:["Obyektni yaxlit va kompleks ravishda ko'rib chiqish","O'zaro bog'liqliklarni e'tiborsiz qoldirish","Quyi tizimlarni ajratib qo'yish","Faqat miqdoriy tahlildan foydalanish"],a:0},
 
-// ── MAVZU 2: Tizim tuzilishi va modellashtirish (52–102) ──
-{id:52,m:2,q:"Matematikmodellashtirish nima?",o:["Haqiqiy tizimlarni matematik tushunchalar orqali ifodalash usuli","Faqat formulalarni yodlash jarayoni","Grafik chizish texnikasi","Kompyuter dasturini yozish"],a:0},
-{id:53,m:2,q:"Matematikmodellashtirish asosiy maqsadi nima?",o:["Murakkab tizimlarni tushunish va tahlil qilish","Faqat hisob-kitob qilish","Grafiklar chizish","Natijalarni bezash"],a:0},
-{id:54,m:2,q:"Matematikmodellashtirish birinchi bosqichi qaysi?",o:["Muammoni aniqlash","Hisoblash va tahlil","Natijalarni qo'llash","Modelni takomillashtirish"],a:0},
-{id:55,m:2,q:"Matematik model deganda nimani tushunamiz?",o:["Haqiqiy tizimning matematik ifodasi","Tajriba natijalari jadvali","Kompyuter qurilmasi","Statistik diagramma"],a:0},
-{id:56,m:2,q:"Modellashtirish jarayoni nimani anglatadi?",o:["Tizimni matematik shaklda yaratish va tahlil qilish","Faqat ma'lumot yig'ish","Hisobot yozish","Grafik dizayn"],a:0},
-{id:57,m:2,q:"Matematikmodellashtirish qaysi sohalarda qo'llaniladi?",o:["Tabiiy, ijtimoiy fanlar, muhandislik va biznesda","Faqat matematikada","Faqat fizika fanida","Faqat iqtisodda"],a:0},
-{id:58,m:2,q:"Matematikmodellashtirish nima uchun zarur?",o:["Murakkab tizimlarni soddalashtirib tushunish uchun","Formulalarni ko'paytirish uchun","Hisoblashni qiyinlashtirish uchun","Faqat nazariya uchun"],a:0},
-{id:59,m:2,q:"Bashorat qilish imkoniyati nimani ta'minlaydi?",o:["Kelajakdagi natijalarni oldindan ko'rish","Faqat hozirgi holatni ko'rish","Ma'lumotlarni yashirish","Natijalarni o'zgartirish"],a:0},
-{id:60,m:2,q:"Matematik modelning asosiy elementlaridan biri qaysi?",o:["Boshqaruvchi tenglamalar","Rangli diagrammalar","Kompyuter dasturi","Grafik interfeys"],a:0},
-{id:61,m:2,q:"Boshlang'ich shartlar nimani belgilaydi?",o:["Tizimning dastlabki holatini","Yakuniy natijani","Grafik ko'rinishni","Hisobot shaklini"],a:0},
-{id:62,m:2,q:"Chiziqli modelning asosiy xususiyati qaysi?",o:["Operatorlarning chiziqli bo'lishi","Juda murakkab bo'lishi","Tasodifiylikka asoslanishi","Noaniqlik yuqori bo'lishi"],a:0},
-{id:63,m:2,q:"Nochiziqli modellar nimani ifodalaydi?",o:["Murakkab va real jarayonlarni","Faqat oddiy hodisalarni","Statik tizimlarni","Aniq va sodda holatlarni"],a:0},
-{id:64,m:2,q:"Analitik modellar nimaga asoslanadi?",o:["Aniq matematik formulalarga","Tasodifiy taxminlarga","Grafik tasvirlarga","Matnli izohlarga"],a:0},
-{id:65,m:2,q:"Differensial tenglamalar qaysi jarayonlarni modellashtiradi?",o:["Harakat va o'sish jarayonlarini","Rang o'zgarishini","Jadval tuzishni","Grafik chizishni"],a:0},
-{id:66,m:2,q:"Ehtimollik modellari nimani hisobga oladi?",o:["Tasodifiylik va noaniqlikni","Faqat aniq qiymatlarni","Faqat chiziqli bog'lanishni","Faqat grafik shakllarni"],a:0},
-{id:67,m:2,q:"Matematik modelning afzalligi qaysi?",o:["Qaror qabul qilishni osonlashtirishi","Hisoblashni murakkablashtirishi","Xatolarni ko'paytirishi","Natijani yashirishi"],a:0},
-{id:68,m:2,q:"Matematik modelning cheklovi nimada?",o:["Haqiqiy tizimni to'liq aks ettirmasligi mumkin","Har doim mutlaqo aniq bo'lishi","Xatolarsiz bo'lishi","Faqat sodda bo'lishi"],a:0},
-{id:69,m:2,q:"Modellashtirish jarayoni qanday xususiyatga ega?",o:["Takroriy va siklik","Faqat bir martalik","Tasodifiy","Tartibsiz"],a:0},
-{id:70,m:2,q:"Matematikmodellashtirish kelajagi nimaga bog'liq?",o:["Sun'iy intellekt va zamonaviy texnologiyalarga","Faqat qog'oz hisob-kitoblarga","Qo'lda chizishga","Faqat nazariy bilimlarga"],a:0},
-{id:71,m:2,q:"Qaror qabul qilish nima?",o:["Mavjud variantlar orasidan eng maqbulini tanlash jarayoni","Tasodifiy usullar yordamida tanlov qilish","Faqat buyruq berish","Maslahat berish"],a:0},
-{id:72,m:2,q:"Qaror qabul qilish jarayoni qaysi sohalarda muhim?",o:["Shaxsiy hayot, biznes va jamiyatda","Faqat shaxsiy hayotda","Faqat biznesda","Faqat davlat boshqaruvida"],a:0},
-{id:73,m:2,q:"Qaror qabul qilish jarayonining birinchi bosqichi qaysi?",o:["Muammoni aniqlash","Variantlarni tanlash","Qarorni amalga oshirish","Natijani baholash"],a:0},
-{id:74,m:2,q:"Muammoni noto'g'ri aniqlash nimaga olib keladi?",o:["Butun jarayon noto'g'ri yo'nalishga ketishiga","Qaror tezroq qabul qilinishiga","Resurslar tejashga","Xatolar kamayishiga"],a:0},
-{id:75,m:2,q:"Maqsad va vazifalarni belgilash nimaga xizmat qiladi?",o:["Qaror jarayonini to'g'ri yo'naltirishga","Qarorni kechiktirishga olib keladi","Variantlarni kamaytirishga xizmat qiladi","Natijani yashirishga xizmat qiladi"],a:0},
-{id:76,m:2,q:"Muvaffaqiyat mezonlari nima uchun kerak?",o:["Qaror samaradorligini baholash uchun","Qarorni bekor qilish uchun","Rejani chalkashtirish uchun","Mas'uliyatni kamaytirish uchun"],a:0},
-{id:77,m:2,q:"Variantlarni ko'p ko'rib chiqish nimani oshiradi?",o:["Eng optimal yechimni topish imkoniyatini","Qaror qabul qilish tezligini kamaytiradi","Xatolar sonini oshiradi","Resurslarni behuda sarflaydi"],a:0},
-{id:78,m:2,q:"SWOT tahlili nimani baholaydi?",o:["Kuchli, zaif tomonlar, imkoniyat va tahdidlarni","Faqat moliyaviy foydani","Faqat raqobatchilarni","Faqat xodimlarni"],a:0},
-{id:79,m:2,q:"Xarajat–foyda tahlili nimaga asoslanadi?",o:["Xarajatlar va kutilayotgan foydani solishtirishga","Faqat xavflarni hisoblashga","Faqat vaqt omiliga","Faqat subyektiv fikrga"],a:0},
-{id:80,m:2,q:"Eng maqbul variantni tanlashda nimalar muhim?",o:["Raqamli tahlil, tajriba va intuitsiya","Faqat his-tuyg'ular","Faqat rahbar fikri","Tasodif"],a:0},
-{id:81,m:2,q:"Qaror tanlashda uzoq muddatli ta'sir nimani bildiradi?",o:["Qarorning kelajakdagi oqibatlarini hisobga olish","Faqat hozirgi foydani ko'rish","Qarorni tez unutish","Natijani yashirish"],a:0},
-{id:82,m:2,q:"Psixologik omillar qarorga qanday ta'sir qiladi?",o:["Qaror sifatiga sezilarli ta'sir ko'rsatadi","Umuman ta'sir qilmaydi","Faqat hujjatlarga ta'sir qiladi","Faqat texnik jarayonga ta'sir qiladi"],a:0},
-{id:83,m:2,q:"Shoshilib qabul qilingan qarorlar odatda qanday bo'ladi?",o:["Ko'pincha noto'g'ri","Har doim to'g'ri","Eng samarali","Xatosiz"],a:0},
-{id:84,m:2,q:"Qarorni amalga oshirish nimani talab qiladi?",o:["Batafsil reja va resurslarni ta'minlashni","Faqat buyruq chiqarishni","Faqat xodimlarga topshirishni","Faqat nazoratni bekor qilishni"],a:0},
-{id:85,m:2,q:"Resurslarni taqsimlash nimani anglatadi?",o:["Moliyaviy va inson resurslarini samarali bo'lishni","Resurslarni cheklashni","Faqat pul ajratishni","Resurslarni to'sishni"],a:0},
-{id:86,m:2,q:"Mas'uliyatlarni belgilash nima uchun kerak?",o:["Vazifalar uchun javobgar shaxslarni aniqlash uchun","Qarorni bekor qilish uchun","Nazoratni kamaytirish uchun","Jarayonni sekinlashtirish uchun"],a:0},
-{id:87,m:2,q:"Nazorat tizimi nima vazifani bajaradi?",o:["Amalga oshirish jarayonini kuzatish va tuzatish","Qarorni yashirish","Qarorni tezlashtirish","Xodimlarni almashtirish"],a:0},
-{id:88,m:2,q:"Amalga oshirishdagi muammolardan biri qaysi?",o:["Resurs tanqisligi","Natijaning aniqligi","Rejaning mukammalligi","Ma'lumotlarning ko'pligi"],a:0},
-{id:89,m:2,q:"Xodimlar qarshiligi nimani anglatadi?",o:["O'zgarishlarga qarshi munosabatni","Yangi g'oyalarni qo'llab-quvvatlashni","Yuqori motivatsiyani","Samaradorlik oshishini"],a:0},
-{id:90,m:2,q:"Qaror natijalarini baholash nima uchun muhim?",o:["Qaror samaradorligini aniqlash uchun","Qarorni yashirish uchun","Qarorni o'zgartirmaslik uchun","Nazoratni to'xtatish uchun"],a:0},
-{id:91,m:2,q:"Baholash mezonlaridan biri qaysi?",o:["Maqsadlarga erishish darajasi","Hujjatlar sonini aniqlash","Xodimlar sonini aniqlash","Qaror tezligini aniqlash"],a:0},
-{id:92,m:2,q:"Qaror qabul qilish qanday jarayon hisoblanadi?",o:["Uzluksiz va doimiy takomillashuvchi","Bir martalik","Tasodifiy","Tartibsiz"],a:0},
-{id:93,m:2,q:"Zamonaviy qaror qabul qilish nimaga asoslanadi?",o:["Ma'lumotlarga asoslangan tahlilga","Faqat tajribaga","Faqat taxminga","Faqat rahbar fikriga"],a:0},
-{id:94,m:2,q:"Sun'iy intellekt qaror qabul qilishda nimaga yordam beradi?",o:["Variantlarni baholash va prognoz qilishga","Qarorni bekor qilishga","Xodimlarni almashtirishga","Hujjat yozishga"],a:0},
-{id:95,m:2,q:"Bulutli texnologiyalar nimani ta'minlaydi?",o:["Real vaqtda ma'lumotlarga kirishni","Qarorlarni yashirishni","Jarayonni sekinlashtirishni","Xatolarni ko'paytirishni"],a:0},
-{id:96,m:2,q:"Eng ko'p uchraydigan xatolardan biri qaysi?",o:["Yetarli tahlil qilmasdan qaror qabul qilish","Bir nechta variant ko'rib chiqish","Ekspert fikrini olish","Ma'lumotlarni tahlil qilish"],a:0},
-{id:97,m:2,q:"Faqat bitta variantni ko'rib chiqish nimaga olib keladi?",o:["Alternativ imkoniyatlarni yo'qotishga","Qaror sifatining oshishiga","Xatolarning kamayishiga","Tezkor muvaffaqiyatga"],a:0},
-{id:98,m:2,q:"Xatolarning oldini olish uchun nima qilish kerak?",o:["Bir nechta variant va ekspert fikridan foydalanish","Shoshilish","Tahlilsiz qaror qabul qilish","Ma'lumotlarni e'tiborsiz qoldirish"],a:0},
-{id:99,m:2,q:"Qaror qabul qilishning umumiy ahamiyati nimada?",o:["Shaxsiy va professional muvaffaqiyatni ta'minlashda","Faqat hujjatlarni to'ldirishda","Faqat nazariyada","Faqat biznesda"],a:0},
-{id:100,m:2,q:"Qaror qabul qilish tizimida ma'lumotlar qanday ahamiyatga ega?",o:["Ma'lumotlar to'g'ri va sifatli bo'lsa, qaror samarali bo'ladi","Ma'lumotlar umuman ahamiyatsiz","Faqat rahbar fikri asosida qaror qabul qilinadi","Ma'lumotlar faqat hisobotlar uchun kerak"],a:0},
-{id:101,m:2,q:"Qarorlarni baholashda qaysi usul qo'llaniladi?",o:["Natijani rejalashtirilgan maqsadlar bilan solishtirish","Faqat raqiblarni kuzatish","Tasodifiy tekshirish","Faqat moliyaviy ko'rsatkichlarni ko'rish"],a:0},
-{id:102,m:2,q:"Guruhiy qaror qabul qilishning asosiy afzalligi nima?",o:["Turli nuqtai nazarlar yig'ilib eng samarali yechim topilishi","Faqat bir kishi mas'ul bo'lishi","Qarorning sekinroq qabul qilinishi","Barcha mas'uliyatdan qochishi"],a:0},
-
-// ── MAVZU 3: Risk, noaniqlik, GIS va DSS (103–153) ──
-{id:103,m:3,q:"Risk tushunchasi nimani anglatadi?",o:["Noaniqlik sharoitida zarar yoki yo'qotish ehtimolini","Faqat foyda olish imkoniyatini","Aniq va kafolatlangan natijani","Rejalashtirilgan daromadni"],a:0},
-{id:104,m:3,q:"Riskning asosiy xususiyatlaridan biri qaysi?",o:["Noaniqlik","Barqarorlik","Kafolatlangan foyda","Doimiylik"],a:0},
-{id:105,m:3,q:"Risk va noaniqlik o'rtasidagi asosiy farq nimada?",o:["Riskda ehtimollikni hisoblash mumkin","Riskda ma'lumot bo'lmaydi","Noaniqlik sug'urtalanadi","Noaniqlik statistikaga asoslanadi"],a:0},
-{id:106,m:3,q:"Ichki risklarga qaysi biri kiradi?",o:["Operatsion risk","Siyosiy risk","Tabiiy ofat","Bozor riski"],a:0},
-{id:107,m:3,q:"Tashqi risklarga qaysi misol to'g'ri keladi?",o:["Siyosiy o'zgarishlar","Xodim xatosi","Ichki nazorat sustligi","Texnik intizomsizlik"],a:0},
-{id:108,m:3,q:"Moliyaviy risklarga qaysi biri kiradi?",o:["Valyuta kursi o'zgarishi","Xodimlar malakasi pastligi","Dasturiy nosozlik","Logistika kechikishi"],a:0},
-{id:109,m:3,q:"Operatsion risklar nimaga bog'liq?",o:["Ichki jarayonlar va inson omiliga","Global iqtisodiy inqirozga","Valyuta bozoriga","Tabiiy ofatlarga"],a:0},
-{id:110,m:3,q:"Strategik risklar asosan nimaga ta'sir qiladi?",o:["Tashkilotning uzoq muddatli maqsadlariga","Kundalik hujjatlarga","Xodimlarning ish vaqtiga","Texnik xizmat ko'rsatishga"],a:0},
-{id:111,m:3,q:"Risk turlari piramidasining eng yuqori qismida qaysi risk turadi?",o:["Strategik risklar","Operatsion risklar","Texnologik risklar","Moliyaviy risklar"],a:0},
-{id:112,m:3,q:"Texnologik risklarga qaysi holat misol bo'la oladi?",o:["Kiberhujumlar","Kredit qaytmasligi","Raqobat kuchayishi","Inflyatsiya"],a:0},
-{id:113,m:3,q:"Risklarni baholashning birinchi bosqichi qaysi?",o:["Riskni aniqlash","Ta'sirni baholash","Riskni kamaytirish","Sug'urtalash"],a:0},
-{id:114,m:3,q:"Risk darajasi qanday aniqlanadi?",o:["Ehtimollik va ta'sir ko'paytmasi orqali","Faqat zarar miqdori bilan","Faqat vaqt omili bilan","Intuitiv qaror asosida"],a:0},
-{id:115,m:3,q:"Aralash usullarga qaysi misol to'g'ri?",o:["Monte-Karlo simulyatsiyasi","Faqat so'rovnoma","Intuitiv baholash","Oddiy kuzatuv"],a:0},
-{id:116,m:3,q:"Risk baholash matritsasi nimaga asoslanadi?",o:["Ehtimollik va ta'sir darajasiga","Faqat moliyaviy ko'rsatkichlarga","Vaqt omiliga","Xodimlar soniga"],a:0},
-{id:117,m:3,q:"Riskni qabul qilish strategiyasi qachon qo'llaniladi?",o:["Risk darajasi kichik bo'lganda","Risk juda katta bo'lganda","Favqulodda holatda","Strategik risklarda"],a:0},
-{id:118,m:3,q:"Riskni ko'chirish strategiyasiga qaysi misol to'g'ri?",o:["Sug'urtalash","Xodimlarni ishdan bo'shatish","Faoliyatni to'xtatish","Riskni e'tiborsiz qoldirish"],a:0},
-{id:119,m:3,q:"Riskni yo'qotish strategiyasi nimani anglatadi?",o:["Xavfli faoliyatdan voz kechish","Riskni kamaytirish","Riskni baholash","Riskni sug'urtalash"],a:0},
-{id:120,m:3,q:"Samarali risk boshqaruvi biznesga qanday ta'sir ko'rsatadi?",o:["Barqarorlik va qaror sifati oshadi","Xarajatlar doim oshadi","Raqobat kamayadi","Innovatsiya to'xtaydi"],a:0},
-{id:121,m:3,q:"Noaniqlik nima?",o:["Kelajakdagi hodisalar oqibatlari haqida to'liq ma'lumot bo'lmasligi","Kelajakdagi xavf darajasining yuqori bo'lishi","Aniq ehtimolliklar mavjud holat","Kafolatlangan natija haqida ma'lumot bo'lmasligi"],a:0},
-{id:122,m:3,q:"Xavf va noaniqlik o'rtasidagi asosiy farq nimada?",o:["Xavf ehtimollik bilan baholanadi, noaniqlikda esa ehtimollik aniq emas","Noaniqlik sug'urtalanadi","Xavf doimiy bo'ladi","Ular bir xil tushuncha"],a:0},
-{id:123,m:3,q:"Noaniqlikning asosiy manbalaridan biri qaysi?",o:["Ma'lumotlarning yetishmasligi","Barqaror bozor","Aniq statistika","Kafolatlangan tajriba"],a:0},
-{id:124,m:3,q:"Statistik noaniqlik nimani anglatadi?",o:["Natijalar tasodifiylik tufayli farq qilishi","Ma'lumotlarning noto'g'riligini","Modelning yo'qligini","Subyektiv fikr tufayli farq qilishi"],a:0},
-{id:125,m:3,q:"Axborot noaniqligi qaysi holatda yuzaga keladi?",o:["Ma'lumotlar to'liq yoki ishonchli bo'lmaganda","Ehtimollik hisoblanganda","Statistik baza kuchli bo'lganda","Model to'liq bo'lganda"],a:0},
-{id:126,m:3,q:"To'liq noaniqlik sharoitida qaysi yondashuv ustun?",o:["Intuitiv qarorlar","Aniq strategik qarorlar","Statistik ehtimollik qarorlari","Sug'urtalash qarorlari"],a:0},
-{id:127,m:3,q:"GIS (Geographic Information System) nima?",o:["Geografik ma'lumotlarni yig'ish, saqlash, tahlil qilish va vizualizatsiya qilishga mo'ljallangan kompyuter tizimi","Faqat xaritalarni chizish dasturi","Matnli hujjatlarni qayta ishlash tizimi","Statistik hisoblash vositasi"],a:0},
-{id:128,m:3,q:"GIS tizimining asosiy maqsadi nimadan iborat?",o:["Geografik ma'lumotlar bilan ishlashni avtomatlashtirish","Faqat grafik dizayn yaratish","Hisob-kitoblarni soddalashtirish","Internet tezligini oshirish"],a:0},
-{id:129,m:3,q:"GIS ning asosiy komponentlariga qaysilar kiradi?",o:["Ma'lumotlar bazasi, dasturiy ta'minot va apparat vositalari","Printer va monitor","Internet va brauzer","Matn muharriri va jadval"],a:0},
-{id:130,m:3,q:"GIS dagi geografik va atributiv ma'lumotlar qayerda saqlanadi?",o:["Ma'lumotlar bazasida","Grafik fayllarda","Operativ xotirada","Faqat qog'oz xaritalarda"],a:0},
-{id:131,m:3,q:"GIS dasturiy ta'minotining asosiy vazifasi nima?",o:["Ma'lumotlarni qayta ishlash va tahlil qilish","Kompyuterni yoqish","Fayllarni o'chirish","Internetga ulanish"],a:0},
-{id:132,m:3,q:"Quyidagilardan qaysi biri GIS apparat vositalariga kiradi?",o:["Kompyuter, GPS va skannerlar","Word va Excel","Brauzerlar","Antivirus dasturlari"],a:0},
-{id:133,m:3,q:"Raster ma'lumotlar nimaga asoslanadi?",o:["Piksellarga","Nuqtalarga","Chiziqlarga","Ko'pburchaklarga"],a:0},
-{id:134,m:3,q:"Quyidagilardan qaysi biri raster ma'lumotlarga misol bo'la oladi?",o:["Sun'iy yo'ldosh tasvirlari","Yo'llar xaritasi","Davlat chegaralari","Binolar konturi"],a:0},
-{id:135,m:3,q:"Vektor ma'lumotlar qaysi elementlardan tashkil topadi?",o:["Nuqta, chiziq va ko'pburchaklardan","Piksellardan","Matnlardan","Jadvallardan"],a:0},
-{id:136,m:3,q:"GIS qatlamlari (Layers) nimani anglatadi?",o:["Har bir alohida ma'lumot turini saqlovchi qatlamlar","Faqat ranglar majmuasi","Grafik effektlar","Printer sozlamalari"],a:0},
-{id:137,m:3,q:"Quyidagilardan qaysi biri GIS qatlamiga misol bo'la oladi?",o:["Yo'llar","Matn muharriri","Hisob-kitob jadvali","Dastur kodi"],a:0},
-{id:138,m:3,q:"GIS ning 'ma'lumotlarni yig'ish' funksiyasi qanday amalga oshiriladi?",o:["GPS, sun'iy yo'ldosh va tadqiqotlar orqali","Faqat qo'lda yozish orqali","Internetdan nusxa olish orqali","Tasodifiy tanlash orqali"],a:0},
-{id:139,m:3,q:"GIS da fazoviy tahlil qaysi bosqichga tegishli?",o:["Tahlil qilish","Vizualizatsiya","Saqlash","Chop etish"],a:0},
-{id:140,m:3,q:"GIS qaysi sohalarda qo'llaniladi?",o:["Shahar rejalashtirish, ekologiya, transport va qishloq xo'jaligida","Faqat o'yin sanoatida","Faqat matbaa ishlarida","Faqat dasturlashda"],a:0},
-{id:141,m:3,q:"Quyidagilardan qaysi biri mashhur GIS dasturi hisoblanadi?",o:["ArcGIS","MS Word","PowerPoint","Notepad"],a:0},
-{id:142,m:3,q:"Qaror qabul qilish tizimi (DSS) nima?",o:["Murakkab muammolarni tahlil qilish va eng yaxshi yechimni topishga yordam beruvchi kompyuter asosidagi axborot tizimi","Faqat hujjatlarni saqlash tizimi","Internet orqali aloqa vositasi","Grafik dizayn dasturi"],a:0},
-{id:143,m:3,q:"DSS kimlar uchun mo'ljallangan?",o:["Rahbarlar va mutaxassislar uchun","Faqat talabalar uchun","Faqat dasturchilar uchun","Faqat operatorlar uchun"],a:0},
-{id:144,m:3,q:"DSS ning asosiy komponentlari qaysilar?",o:["Ma'lumotlar bazasi, model bazasi, bilimlar bazasi va foydalanuvchi interfeysi","Printer, skaner va monitor","Operatsion tizim va drayverlar","Matn muharriri va jadval"],a:0},
-{id:145,m:3,q:"DSS dagi ma'lumotlar bazasi nimani o'z ichiga oladi?",o:["Ichki, tashqi, tarixiy va real vaqt ma'lumotlarini","Faqat grafik ma'lumotlarni","Faqat matnli hujjatlarni","Faqat foydalanuvchi sozlamalarini"],a:0},
-{id:146,m:3,q:"Model bazasining vazifasi nima?",o:["Matematik va statistik modellar yordamida tahlil qilish","Ma'lumotlarni chop etish","Grafik dizayn yaratish","Fayllarni arxivlash"],a:0},
-{id:147,m:3,q:"Bilimlar bazasi nimaga asoslanadi?",o:["Qoidalar, tajribalar, ekspert tizimlar va sun'iy intellektga","Faqat jadval ma'lumotlariga","Matn muharrirlariga","Internet sahifalariga"],a:0},
-{id:148,m:3,q:"DSS turlaridan qaysi biri katta hajmdagi ma'lumotlarni tahlil qilishga yo'naltirilgan?",o:["Ma'lumotga yo'naltirilgan DSS","Modelga yo'naltirilgan DSS","Bilimga yo'naltirilgan DSS","Grafikaga yo'naltirilgan DSS"],a:0},
-{id:149,m:3,q:"Modelga yo'naltirilgan DSS ga qaysi misol to'g'ri keladi?",o:["Moliyaviy modellashtirish","Elektron pochta tizimi","Matn muharriri","Grafik dizayn dasturi"],a:0},
-{id:150,m:3,q:"Bilimga yo'naltirilgan DSS qaysi sohada ko'proq qo'llaniladi?",o:["Tibbiy diagnostikada","Hujjatlarni chop etishda","Internet tezligini oshirishda","Fayllarni saqlashda"],a:0},
-{id:151,m:3,q:"Qaror qabul qilish jarayonida 'Design' bosqichida nima amalga oshiriladi?",o:["Alternativ yechim variantlari ishlab chiqiladi","Qaror hayotga tadbiq etiladi","Natijalar saqlanadi","Hisobot chop etiladi"],a:0},
-{id:152,m:3,q:"DSS ning qaysi afzalligi xatolarni kamaytirishga xizmat qiladi?",o:["Ob'ektiv baholash va taqqoslash","Grafik dizayn imkoniyati","Fayllarni tez ochish","Internetga ulanish"],a:0},
-{id:153,m:3,q:"Quyidagilardan qaysi biri mashhur DSS platformasi hisoblanadi?",o:["Microsoft Power BI","MS Paint","Notepad","WinRAR"],a:0}
+// ── MAVZU 2: 55–108 ──
+{id:55,m:2,q:"Muhit bilan o'zaro ta'siriga ko'ra tizimlar qanday turlarga bo'linadi?",o:["Ochiq va yopiq","Sun'iy va tabiiy","Oddiy va murakkab","Kichik va katta"],a:0},
+{id:56,m:2,q:"Ochiq biologik tizimga misol:",o:["Tirik organizm","Tosh","Tog'","Kristall"],a:0},
+{id:57,m:2,q:"Tizimli tahlilning asosiy natijasi:",o:["Asoslangan boshqaruv qarorini qabul qilish","Vazifani tartibsizlik darajasigacha soddalashtirish","Faqat grafiklar qurish","Maqsadlarni e'tiborsiz qoldirish"],a:0},
+{id:58,m:2,q:"Axborot tizimiga misol:",o:["Ma'lumotlar bazasi va dasturiy ta'minot","O'rmon","Hayvon organizmi","Ko'l"],a:0},
+{id:59,m:2,q:"Qanday tizimlar oddiy tizimlar deyiladi?",o:["Elementlari va bog'lanishlari kam bo'lgan tizimlar","Elementlari juda ko'p bo'lgan tizimlar","Faqat ijtimoiy tizimlar","Faqat texnik tizimlar"],a:0},
+{id:60,m:2,q:"Tizimning sifat modellari nimani tavsiflaydi?",o:["Sonli parametrsiz xususiyatlar va bog'lanishlarni","Faqat sonli xarakteristikalarni","Faqat tizim chiqishlarini","Faqat tizim kirishlarini"],a:0},
+{id:61,m:2,q:"Tizimning miqdoriy modellari nimani tavsiflaydi?",o:["Sonli parametrlar va tenglamalar yordamida","Sonlarsiz xatti-harakatlarni","Faqat maqsadlarni","Faqat sifat belgilarini"],a:0},
+{id:62,m:2,q:"Qaror variantlarini baholashda qaysi usul qo'llaniladi?",o:["Ekspert baholash usuli","Tasodifiy sonlar usuli","Faqat kuzatish","Muqobil variantlarni e'tiborsiz qoldirish"],a:0},
+{id:63,m:2,q:"Senariyli tahlil nima uchun qo'llaniladi?",o:["Tizimning mumkin bo'lgan kelajak holatlarini o'rganish uchun","Qarorlarni tasodifiy tanlash uchun","Kelajakni e'tiborsiz qoldirish uchun","Faqat o'tmishni tavsiflash uchun"],a:0},
+{id:64,m:2,q:"Elementlari ortiqcha bo'lgan tizim qanday xususiyatga ega bo'ladi?",o:["Ishonchliligi yuqori bo'ladi","Faqat soddalikka ega bo'ladi","To'liq beqaror bo'ladi","Tasodifiy ishlaydi"],a:0},
+{id:65,m:2,q:"Diskret tizimga misol:",o:["Tashrif buyuruvchilar hisoblagichi","Gaz bosimi","Daryo","Havo harorati"],a:0},
+{id:66,m:2,q:"Uzluksiz tizimga misol:",o:["Daryodagi suv harakati","Xodimlar soni","Sinfdagi talabalar soni","Avtoturargohdagi mashinalar soni"],a:0},
+{id:67,m:2,q:"Masalani qismlarga ajratishga imkon beruvchi tizimli tahlil usuli:",o:["Dekompozitsiya","Sinov va xatolar usuli","Sintez","Intuitsiya"],a:0},
+{id:68,m:2,q:"Tizimli tahlilda sintez usuli nimani anglatadi?",o:["Qismlarni yagona butunga birlashtirishni","Tasodifiy birlashtirishni","Modelni yo'q qilishni","Ma'lumotlarni e'tiborsiz qoldirishni"],a:0},
+{id:69,m:2,q:"Tizimli tahlil qaror qabul qilishning qaysi sharoitlari bilan bog'liq?",o:["Noaniqlik va tavakkalchilik sharoitlari bilan","To'liq aniqlik sharoitlari bilan","Elementlarning mustaqilligi bilan","Maqsadlarning yo'qligi bilan"],a:0},
+{id:70,m:2,q:"Ko'p darajali tizimga misol:",o:["Inson organizmi","Bitta kompyuter fayli","Tosh","Uchburchak"],a:0},
+{id:71,m:2,q:"Qanday tizimlar o'zini o'zi boshqaruvchi tizimlar deyiladi?",o:["O'z xatti-harakatini mustaqil ravishda tuzatadigan tizimlar","Qayta aloqasiz tizimlar","Mustaqil elementlar yig'indisi","Tasodifiy tizimlar"],a:0},
+{id:72,m:2,q:"Tizimli tahlil nima uchun qo'llaniladi?",o:["Boshqaruv samaradorligini oshirish uchun","Tartibsizlikni oshirish uchun","Maqsadlarni e'tiborsiz qoldirish uchun","Tizimlarni yo'q qilish uchun"],a:0},
+{id:73,m:2,q:"Tizim qachon adaptiv hisoblanadi?",o:["Tashqi muhitdagi o'zgarishlarga moslasha olsa","Hech qachon o'zgarmasa","Tasodifiy ishlasa","To'liq izolyatsiyalangan bo'lsa"],a:0},
+{id:74,m:2,q:"Umumiydan xususiyga o'tish jarayoni qanday ataladi?",o:["Deduksiya","Induksiya","Sintez","Dekompozitsiya"],a:0},
+{id:75,m:2,q:"Xususiydan umumiyga o'tish jarayoni qanday ataladi?",o:["Induksiya","Deduksiya","Optimallashtirish","Sintez"],a:0},
+{id:76,m:2,q:"Tizimli tahlilda mezon deganda nima tushuniladi?",o:["Eng yaxshi variantni tanlash sharti","Quyi tizim","Tasodifiy cheklov","Faqat matematik model"],a:0},
+{id:77,m:2,q:"Tizimli tahlildagi cheklovlar – bu:",o:["Yechim izlanadigan ruxsat etilgan chegaralar","Tashqi muhit","Faqat kirish ma'lumotlari","Faqat chiqish ma'lumotlari"],a:0},
+{id:78,m:2,q:"Tashkiliy tizimga misol:",o:["Universitet","O'rmon","Ko'l","Avtomobil"],a:0},
+{id:79,m:2,q:"Murakkab tizimni tahlil qilish uchun soddalashtirish jarayoni qanday ataladi?",o:["Abstraksiyalash","Ideallashtirish","Maqsadsiz soddalashtirish","Tasodifiylik"],a:0},
+{id:80,m:2,q:'"Ko\'p maqsadli tizimlar" atamasi nimani anglatadi?',o:["Bir vaqtning o'zida bir nechta vazifani bajaruvchi tizimlar","Bitta funksiyaga ega tizimlar","Tasodifiy ishlovchi tizimlar","Maqsadsiz tizimlar"],a:0},
+{id:81,m:2,q:"Qanday tizimlar stoxastik tizimlar deyiladi?",o:["Ehtimollik xarakteristikalariga ega tizimlar","To'liq determinallashgan tizimlar","Boshqaruvsiz tizimlar","Elementsiz tizimlar"],a:0},
+{id:82,m:2,q:"Stoxastik tizimga misol:",o:["Tangani tashlash","Chizg'ich","Soat","Kalkulyator"],a:0},
+{id:83,m:2,q:"Tizimli tahlil nimaga imkon beradi?",o:["Qaror variantlarini taqqoslashga","Muqobil variantlarni e'tiborsiz qoldirishga","Maqsadsiz ishlashga","Tanlovni bekor qilishga"],a:0},
+{id:84,m:2,q:'Tizimli tahlildagi "maqsad va vositalar" prinsipi nimani anglatadi?',o:["Maqsadga erishish usullarining unga mos kelishini","Kirish va chiqishning bir xil bo'lishini","Strategiyani tasodifiy tanlashni","Resurslarni e'tiborsiz qoldirishni"],a:0},
+{id:85,m:2,q:"Kelajakdagi holatlarni o'rganishga qaysi usul asoslanadi?",o:["Ssenariy usuli","Tasodifiy sonlar usuli","Sinov va xatolar usuli","Vaqt omilini e'tiborsiz qoldirish"],a:0},
+{id:86,m:2,q:"Quyidagilardan qaysi biri boshqaruv tizimi elementiga kirmaydi?",o:["Tasodifiy shovqin","Boshqaruvchi qurilma","Boshqaruv obyekti","Muhit"],a:0},
+{id:87,m:2,q:"Determinallashgan tizimga misol:",o:["Sayyoralarning orbitalar bo'ylab harakati","Bozor narxlari","Lotereya","Kubik tashlash"],a:0},
+{id:88,m:2,q:"Tizimlarni optimallashtirish deganda nima tushuniladi?",o:["Ishlashning eng yaxshi variantini tanlash","Tartibsizlikni oshirish","Tasodifiy modellashtirish","Cheklovlarni e'tiborsiz qoldirish"],a:0},
+{id:89,m:2,q:"Murakkab tizimlarni modellashtirish ko'pincha nima yordamida amalga oshiriladi?",o:["Axborot texnologiyalari va hisoblash tajribalari yordamida","Tahlilsiz kuzatish yordamida","Faqat og'zaki mulohazalar yordamida","Faqat qo'lda hisoblash yordamida"],a:0},
+{id:90,m:2,q:"Iyerarxik tizimga misol:",o:["Davlat boshqaruvi tizimi","Bitta element","Tosh","Qog'ozdagi chiziq"],a:0},
+{id:91,m:2,q:"Qayta aloqaga ega tizimlar odatda:",o:["Barqarorroq va boshqariluvchanroq bo'ladi","Tasodifiy bo'ladi","Tartibsiz bo'ladi","Mustaqil bo'ladi"],a:0},
+{id:92,m:2,q:"Fizik tizimga misol:",o:["Elektr zanjiri","Siyosiy partiya","Ijtimoiy guruh","Iqtisodiy model"],a:0},
+{id:93,m:2,q:"Tizimli yondashuvning asosiy prinsipi:",o:["Obyektni muhit bilan bog'liq holda yagona butun sifatida ko'rib chiqish","Faqat kirishlarni o'rganish","Elementlarni tahlilsiz ajratish","Tashqi muhitni e'tiborsiz qoldirish"],a:0},
+{id:94,m:2,q:"Optimal variantni tanlash uchun nima qo'llaniladi?",o:["Samaradorlik mezoni","Sinov va xatolar usuli","Faqat tasodifiylik","Cheklovlarni e'tiborsiz qoldirish"],a:0},
+{id:95,m:2,q:"Kelib chiqishiga ko'ra tizimlar qanday turlarga bo'linadi?",o:["Tabiiy va sun'iy","Oddiy va murakkab","Diskret va uzluksiz","Determinallashgan va stoxastik"],a:0},
+{id:96,m:2,q:"Sun'iy ijtimoiy tizimga misol:",o:["Davlat","Quyosh tizimi","O'rmon","Daryo"],a:0},
+{id:97,m:2,q:"Boshqaruvda tizimli tahlil nima imkonini beradi?",o:["Qarorlarning asoslanganlik darajasini oshirishga","Tartibsizlikni oshirishga","Maqsadlarni e'tiborsiz qoldirishga","Tanlovni bekor qilishga"],a:0},
+{id:98,m:2,q:"Tizimli tahlilni qo'llashning asosiy natijasi:",o:["Murakkab obyektni yaxlit tushunish darajasigacha soddalashtirish va qaror qabul qilish","Tahlilsiz mexanik model yaratish","Bog'lanishlarni e'tiborsiz qoldirish","Tasodifiy xulosalar chiqarish"],a:0},
+{id:99,m:2,q:"Modellashtirishning asosiy turlari:",o:["Matematik, imitatsion, kompyuter modellashtirish","Matematik, imitatsion, tarixiy modellashtirish","Biologik, imitatsion, tarixiy modellashtirish","Biologik, fizik, tarixiy modellashtirish"],a:0},
+{id:100,m:2,q:"Tizimli yondashuvning asosiy maqsadi nima?",o:["Obyektlarni o'zaro bog'langan elementlardan tashkil topgan yaxlit tizim sifatida ko'rib chiqish","Obyektning faqat alohida qismlarini o'rganish","Tashqi muhit ta'sirini e'tiborsiz qoldirish","Faqat miqdoriy ko'rsatkichlarni tahlil qilish"],a:0},
+{id:101,m:2,q:"Tizimli tahlil bosqichlariga qaysi biri kiradi?",o:["Muammo va maqsadlarni shakllantirish","Tizimni dasturlash","Uskunalarni xarid qilish","Tahlilsiz ekspluatatsiya qilish"],a:0},
+{id:102,m:2,q:"Tizim iyerarxiyasi nima?",o:["Elementlarning darajalar bo'yicha tartiblanganligi","Komponentlarning tasodifiy birlashuvi","Tuzilmaning mavjud emasligi","Mustaqil obyektlar yig'indisi"],a:0},
+{id:103,m:2,q:"Qaysi xususiyat tizimning yaxlitligini tavsiflaydi?",o:["Elementlar o'rtasidagi bog'lanishlarning mavjudligi","Xatti-harakatlarning tasodifiyligi","Tuzilmaning mavjud emasligi","Elementlarning to'liq mustaqilligi"],a:0},
+{id:104,m:2,q:"Tizimning kirishi (input) nima hisoblanadi? (2)",o:["Resurslar va tashqi muhit ta'sirlari","Faqat ish natijalari","Ichki elementlar","Boshqaruv tuzilmasi"],a:0},
+{id:105,m:2,q:"Tizimli tahlilda model nima?",o:["Tizimning soddalashtirilgan ko'rinishi","Tizimning aniq nusxasi","Dastur kodi","Fizik obyekt"],a:0},
+{id:106,m:2,q:"Tizimning yaxlitligi qanday xususiyat bilan tavsiflanadi?",o:["Elementlar o'rtasidagi bog'lanishlarning mavjudligi","Xatti-harakatlarning tasodifiyligi","Tuzilmaning mavjud emasligi","Elementlarning to'liq mustaqilligi"],a:0},
+{id:107,m:2,q:"Tizimning kirishi (input) deganda nima tushuniladi?",o:["Resurslar va tashqi muhit ta'sirlari","Faqat ish natijalari","Ichki elementlar","Boshqaruv tuzilmasi"],a:0},
+{id:108,m:2,q:"Tizimli tahlilda model qanday tushuncha?",o:["Tizimning soddalashtirilgan ko'rinishi","Tizimning aniq nusxasi","Dastur kodi","Fizik obyekt"],a:0}
 ];
 
-const LS='tiztahlil_v1';
-let S=load();
-let cdInt=null,cdTotal=0,cdLeft=0;
-let pendingMavzu=null,currentTab='test';
-let _pendingOpts=[],_pendingCi=-1,_pendingQid=-1;
+// ── STATE ──
+const LS = 'tiztahlil_new_v1';
+let S = load();
+let cdInt = null, cdTotal = 0, cdLeft = 0;
+let pendingMavzu = null, currentTab = 'test';
+let _pOpts = [], _pCi = -1, _pQid = -1;
 
 function def(){return{activeMavzu:null,curIdx:0,questions:[],correct:0,wrong:0,history:[],missed:[],flagged:[],missedMode:false,dotStatus:{}};}
 function load(){
   try{
-    const raw=localStorage.getItem(LS);
-    if(!raw)return def();
-    const p=JSON.parse(raw);
+    const r = localStorage.getItem(LS);
+    if(!r) return def();
+    const p = JSON.parse(r);
     if(p.dotStatus){Object.keys(p.dotStatus).forEach(k=>{const d=p.dotStatus[k];if(!d||!Array.isArray(d.opts)||!d.opts.length)delete p.dotStatus[k];});}
-    return Object.assign(def(),p);
+    return Object.assign(def(), p);
   }catch{return def();}
 }
-function save(){localStorage.setItem(LS,JSON.stringify(S));}
-function shuf(a){return[...a].sort(()=>Math.random()-.5);}
+function save(){localStorage.setItem(LS, JSON.stringify(S));}
+function shuf(a){return [...a].sort(()=>Math.random()-.5);}
 function shuffleOpts(q){const c=q.o[q.a];const s=shuf([...q.o]);return{opts:s,ci:s.indexOf(c)};}
 
+// ── COUNTDOWN ──
 function startCD(min){
-  cdTotal=min*60;cdLeft=cdTotal;clearInterval(cdInt);
-  document.getElementById('cdWrap').style.display='';
+  cdTotal = min*60; cdLeft = cdTotal;
+  clearInterval(cdInt);
+  document.getElementById('cdWrap').style.display = '';
   updateCD();
-  cdInt=setInterval(()=>{if(--cdLeft<=0)timeUp();else updateCD();},1000);
+  cdInt = setInterval(()=>{if(--cdLeft<=0) timeUp(); else updateCD();}, 1000);
 }
-function stopCD(){clearInterval(cdInt);document.getElementById('cdWrap').style.display='none';}
+function stopCD(){clearInterval(cdInt); document.getElementById('cdWrap').style.display = 'none';}
 function updateCD(){
-  const m=Math.floor(cdLeft/60).toString().padStart(2,'0');
-  const s=(cdLeft%60).toString().padStart(2,'0');
-  const el=document.getElementById('cdTime'),fill=document.getElementById('cdFill');
-  el.textContent=`${m}:${s}`;
-  fill.style.width=(cdTotal>0?cdLeft/cdTotal*100:100)+'%';
-  if(cdLeft<=30){el.className='cd-time danger';fill.className='cd-fill danger';}
-  else if(cdLeft<=60){el.className='cd-time warn';fill.className='cd-fill warn';}
-  else{el.className='cd-time';fill.className='cd-fill';}
+  const m = Math.floor(cdLeft/60).toString().padStart(2,'0');
+  const s = (cdLeft%60).toString().padStart(2,'0');
+  const el = document.getElementById('cdTime'), fill = document.getElementById('cdFill');
+  el.textContent = `${m}:${s}`;
+  fill.style.width = (cdTotal>0 ? cdLeft/cdTotal*100 : 100)+'%';
+  if(cdLeft<=30){el.className='cd-time danger'; fill.className='cd-fill danger';}
+  else if(cdLeft<=60){el.className='cd-time warn'; fill.className='cd-fill warn';}
+  else{el.className='cd-time'; fill.className='cd-fill';}
 }
 function timeUp(){
   stopCD();
-  const mv=MAVZULAR.find(x=>x.id===S.activeMavzu)||{full:''};
-  document.getElementById('testArea').innerHTML=`<div class="timeup-card">
-    <div style="font-size:56px;margin-bottom:14px">⏰</div>
-    <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--red);margin-bottom:8px">Vaqt tugadi!</div>
-    <div style="color:var(--muted);font-size:14px;margin-bottom:24px;line-height:1.7">${mv.full}<br><br>${S.correct} ta to'g'ri / ${S.curIdx} ta savol ulgurildi.<br>Test boshidan boshlanadi.</div>
+  const mv = MAVZULAR.find(x=>x.id===S.activeMavzu)||{full:''};
+  document.getElementById('testArea').innerHTML = `<div class="timeup-card">
+    <div style="font-size:62px;margin-bottom:16px">⏰</div>
+    <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--red);margin-bottom:10px">Vaqt tugadi!</div>
+    <div style="color:var(--muted);font-size:14px;margin-bottom:28px;line-height:1.75">${mv.full}<br><br>${S.correct} ta to'g'ri / ${S.curIdx} ta savol ulgurildi.<br>Test boshidan boshlanadi.</div>
     <div class="done-acts">
       <button class="btn-warn" onclick="showTimeModal(${S.activeMavzu})">🔄 Qayta boshlash</button>
       <button class="btn-sec" onclick="switchTab('missed')">❌ O'tilmaganlar</button>
     </div>
   </div>`;
-  S.curIdx=0;S.correct=0;S.wrong=0;S.history=[];S.questions=[];S.dotStatus={};
-  save();updateStats();buildQnav();updateProgress();
+  S.curIdx=0; S.correct=0; S.wrong=0; S.history=[]; S.questions=[]; S.dotStatus={};
+  save(); updateStats(); buildQnav(); updateProgress();
 }
 
+// ── MODAL ──
 function showTimeModal(mid){
-  pendingMavzu=mid;
-  const mv=MAVZULAR.find(x=>x.id===mid)||{full:"O'tilmaganlar"};
-  const cnt=mid>0?RAW.filter(q=>q.m===mid).length:S.missed.length;
-  document.getElementById('timeModalDesc').innerHTML=`<strong>${mv.full}</strong><br>${cnt} ta savol. Vaqt tugasa boshidan boshlanadi.`;
-  document.getElementById('timeModal').style.display='flex';
+  pendingMavzu = mid;
+  const mv = MAVZULAR.find(x=>x.id===mid)||{full:"O'tilmaganlar"};
+  const cnt = mid>0 ? RAW.filter(q=>q.m===mid).length : S.missed.length;
+  document.getElementById('timeModalDesc').innerHTML = `<strong>${mv.full||"O'tilmaganlar rejimi"}</strong><br>${cnt} ta savol · Vaqt tugasa boshidan boshlanadi.`;
+  document.getElementById('timeModal').style.display = 'flex';
 }
-function modalOutside(e){if(e.target===document.getElementById('timeModal'))document.getElementById('timeModal').style.display='none';}
-function pickTime(min){document.getElementById('timeModal').style.display='none';if(pendingMavzu===-1)initMissed(min);else initMavzu(pendingMavzu,min);}
+function modalOutside(e){if(e.target===document.getElementById('timeModal')) document.getElementById('timeModal').style.display='none';}
+function pickTime(min){document.getElementById('timeModal').style.display='none'; if(pendingMavzu===-1) initMissed(min); else initMavzu(pendingMavzu, min);}
 function pickCustom(){
-  const v=parseInt(document.getElementById('customMin').value);
-  if(!v||v<1){showToast('❌ Kamida 1 daqiqa');return;}
+  const v = parseInt(document.getElementById('customMin').value);
+  if(!v||v<1){showToast('❌ Kamida 1 daqiqa'); return;}
   document.getElementById('timeModal').style.display='none';
-  if(pendingMavzu===-1)initMissed(v);else initMavzu(pendingMavzu,v);
+  if(pendingMavzu===-1) initMissed(v); else initMavzu(pendingMavzu, v);
 }
 
-function initMavzu(mid,min){
+// ── INIT ──
+function initMavzu(mid, min){
   stopCD();
-  S.activeMavzu=mid;S.curIdx=0;S.correct=0;S.wrong=0;S.history=[];S.missedMode=false;S.dotStatus={};
-  S.questions=shuf(RAW.filter(q=>q.m===mid)).map(q=>q.id);
-  save();buildMavzuBtns();updateStats();buildQnav();updateProgress();
-  show(['progWrap','qnavWrap']);renderQ();startCD(min);
+  S.activeMavzu=mid; S.curIdx=0; S.correct=0; S.wrong=0; S.history=[]; S.missedMode=false; S.dotStatus={};
+  S.questions = shuf(RAW.filter(q=>q.m===mid)).map(q=>q.id);
+  save(); buildMavzuBtns(); updateStats(); buildQnav(); updateProgress();
+  show(['progWrap','qnavWrap']); renderQ(); startCD(min);
 }
 function initMissed(min){
-  if(!S.missed.length){showToast("✅ O'tilmaganlar yo'q!");return;}
+  if(!S.missed.length){showToast("✅ O'tilmaganlar yo'q!"); return;}
   stopCD();
-  S.missedMode=true;S.curIdx=0;S.correct=0;S.wrong=0;S.history=[];S.dotStatus={};
-  S.questions=shuf([...S.missed]);
-  save();buildMavzuBtns();updateStats();buildQnav();updateProgress();
-  show(['progWrap','qnavWrap']);switchTab('test');renderQ();startCD(min);
+  S.missedMode=true; S.curIdx=0; S.correct=0; S.wrong=0; S.history=[]; S.dotStatus={};
+  S.questions = shuf([...S.missed]);
+  save(); buildMavzuBtns(); updateStats(); buildQnav(); updateProgress();
+  show(['progWrap','qnavWrap']); switchTab('test'); renderQ(); startCD(min);
 }
 function show(ids){ids.forEach(id=>document.getElementById(id).style.display='');}
 
+// ── UI UPDATES ──
 function updateStats(){
-  const t=S.correct+S.wrong;
-  document.getElementById('sTotal').textContent=t;
-  document.getElementById('sCorrect').textContent=S.correct;
-  document.getElementById('sWrong').textContent=S.wrong;
-  document.getElementById('sPct').textContent=t>0?Math.round(S.correct/t*100)+'%':'—';
-  document.getElementById('streakWrap').innerHTML=S.history.slice(-24).map(h=>`<div class="s-dot ${h.correct?'ok':'no'}"></div>`).join('');
-  const b=document.getElementById('missed-badge');
-  b.textContent=S.missed.length;b.style.display=S.missed.length?'':'none';
+  const t = S.correct + S.wrong;
+  document.getElementById('sTotal').textContent = t;
+  document.getElementById('sCorrect').textContent = S.correct;
+  document.getElementById('sWrong').textContent = S.wrong;
+  document.getElementById('sPct').textContent = t>0 ? Math.round(S.correct/t*100)+'%' : '—';
+  document.getElementById('streakWrap').innerHTML = S.history.slice(-28).map(h=>`<div class="s-dot ${h.correct?'ok':'no'}"></div>`).join('');
+  const b = document.getElementById('missed-badge');
+  b.textContent = S.missed.length; b.style.display = S.missed.length ? '' : 'none';
 }
 function updateProgress(){
-  if(!S.activeMavzu||!S.questions.length)return;
-  const pct=Math.round(Math.min(S.curIdx,S.questions.length)/S.questions.length*100);
-  document.getElementById('progFill').style.width=pct+'%';
-  document.getElementById('progPct').textContent=pct+'%';
-  const mv=MAVZULAR.find(x=>x.id===S.activeMavzu);
-  document.getElementById('progLbl').textContent=
-    (S.missedMode?"❌ O'tilmaganlar":(mv?mv.full:''))+
-    ` — ${Math.min(S.curIdx+1,S.questions.length)}/${S.questions.length}`;
+  if(!S.activeMavzu||!S.questions.length) return;
+  const pct = Math.round(Math.min(S.curIdx, S.questions.length)/S.questions.length*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progPct').textContent = pct+'%';
+  const mv = MAVZULAR.find(x=>x.id===S.activeMavzu);
+  document.getElementById('progLbl').textContent =
+    (S.missedMode ? "❌ O'tilmaganlar" : (mv?mv.full:'')) +
+    ` — ${Math.min(S.curIdx+1, S.questions.length)}/${S.questions.length}`;
 }
 function buildMavzuBtns(){
-  const wrap=document.getElementById('mavzuBtns');wrap.innerHTML='';
+  const wrap = document.getElementById('mavzuBtns'); wrap.innerHTML='';
   MAVZULAR.forEach(m=>{
-    const cnt=RAW.filter(q=>q.m===m.id).length;
-    const btn=document.createElement('button');
-    btn.className='mavzu-btn'+(S.activeMavzu===m.id&&!S.missedMode?' active':'');
-    btn.innerHTML=`${m.name}<span class="m-badge">${cnt}</span>`;
-    btn.title=m.full;btn.onclick=()=>{S.missedMode=false;showTimeModal(m.id);};
+    const cnt = RAW.filter(q=>q.m===m.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'mavzu-btn' + (S.activeMavzu===m.id&&!S.missedMode?' active':'');
+    btn.innerHTML = `${m.name}<span class="m-badge">${cnt}</span>`;
+    btn.title = m.full; btn.onclick = ()=>{S.missedMode=false; showTimeModal(m.id);};
     wrap.appendChild(btn);
   });
 }
 function buildQnav(){
-  const wrap=document.getElementById('qnavDots');wrap.innerHTML='';
-  if(!S.questions.length){document.getElementById('qnavWrap').style.display='none';return;}
+  const wrap = document.getElementById('qnavDots'); wrap.innerHTML='';
+  if(!S.questions.length){document.getElementById('qnavWrap').style.display='none'; return;}
   document.getElementById('qnavWrap').style.display='';
   S.questions.forEach((qid,idx)=>{
-    const ds=S.dotStatus[qid];
-    const dot=document.createElement('div');
-    let cls='qnav-dot';
-    if(idx===S.curIdx)cls+=' current';
-    else if(ds)cls+=ds.status==='ok'?' done-ok':' done-no';
-    dot.className=cls;dot.textContent=idx+1;
-    dot.title=ds?(ds.status==='ok'?"✅ To'g'ri":"❌ Noto'g'ri"):'Javob berilmagan';
-    dot.onclick=()=>jumpTo(idx);
+    const ds = S.dotStatus[qid];
+    const dot = document.createElement('div');
+    let cls = 'qnav-dot';
+    if(idx===S.curIdx) cls+=' current';
+    else if(ds) cls += ds.status==='ok' ? ' done-ok' : ' done-no';
+    dot.className=cls; dot.textContent=idx+1;
+    dot.title = ds ? (ds.status==='ok'?"✅ To'g'ri":"❌ Noto'g'ri") : 'Javob berilmagan';
+    dot.onclick = ()=>jumpTo(idx);
     wrap.appendChild(dot);
   });
 }
 function jumpTo(idx){
-  if(idx<0||idx>=S.questions.length)return;
-  S.curIdx=idx;save();updateProgress();buildQnav();
-  const qid=S.questions[idx];
-  if(S.dotStatus[qid])renderReadOnly(qid,S.dotStatus[qid]);else renderQ();
+  if(idx<0||idx>=S.questions.length) return;
+  S.curIdx=idx; save(); updateProgress(); buildQnav();
+  const qid = S.questions[idx];
+  if(S.dotStatus[qid]) renderReadOnly(qid, S.dotStatus[qid]); else renderQ();
 }
 
+// ── RENDER Q ──
 function renderQ(){
-  const area=document.getElementById('testArea');
-  if(S.curIdx>=S.questions.length){renderDone(area);stopCD();return;}
-  const qid=S.questions[S.curIdx];
-  const q=RAW.find(x=>x.id===qid);
-  if(!q){S.curIdx++;renderQ();return;}
-  if(S.dotStatus[qid]){renderReadOnly(qid,S.dotStatus[qid]);return;}
-  const{opts,ci}=shuffleOpts(q);
-  _pendingOpts=[...opts];_pendingCi=ci;_pendingQid=qid;
+  const area = document.getElementById('testArea');
+  if(S.curIdx>=S.questions.length){renderDone(area); stopCD(); return;}
+  const qid = S.questions[S.curIdx];
+  const q = RAW.find(x=>x.id===qid);
+  if(!q){S.curIdx++; renderQ(); return;}
+  if(S.dotStatus[qid]){renderReadOnly(qid, S.dotStatus[qid]); return;}
+  const {opts, ci} = shuffleOpts(q);
+  _pOpts=[...opts]; _pCi=ci; _pQid=qid;
   const L=['A','B','C','D'];
-  const fl=S.flagged.includes(qid);
-  const mv=S.missedMode?"❌ O'tilmaganlar":(MAVZULAR.find(x=>x.id===S.activeMavzu)||{name:''}).name;
-  area.innerHTML=`<div class="q-card">
+  const fl = S.flagged.includes(qid);
+  const mv = S.missedMode ? "❌ O'tilmaganlar" : (MAVZULAR.find(x=>x.id===S.activeMavzu)||{name:''}).name;
+  area.innerHTML = `<div class="q-card">
     <div class="q-head">
       <span class="q-topic">${mv} · #${qid}</span>
       <span class="q-num">${S.curIdx+1} / ${S.questions.length}</span>
@@ -529,7 +560,7 @@ function renderQ(){
     <div class="q-text">${q.q}</div>
     <div class="opts">${opts.map((o,i)=>`
       <button class="opt" onclick="pick(${i})">
-        <span class="opt-ltr">${L[i]}</span>${o}
+        <span class="opt-ltr">${L[i]}</span><span>${o}</span>
       </button>`).join('')}
     </div>
     <div class="fb" id="fb"></div>
@@ -538,21 +569,21 @@ function renderQ(){
         ${fl?'🚩 Belgilangan':'🏳️ Belgilash'}
       </button>
       <button class="next-btn" id="nxtBtn" onclick="nextQ()">
-        ${S.curIdx+1<S.questions.length?'Keyingi →':'Natija →'}
+        ${S.curIdx+1<S.questions.length ? 'Keyingi →' : 'Natija →'}
       </button>
     </div>
   </div>`;
 }
 
-function renderReadOnly(qid,ds){
-  const area=document.getElementById('testArea');
-  const q=RAW.find(x=>x.id===qid);
+function renderReadOnly(qid, ds){
+  const area = document.getElementById('testArea');
+  const q = RAW.find(x=>x.id===qid);
   const L=['A','B','C','D'];
-  const idx=S.questions.indexOf(qid);
-  const opts=ds.opts||q.o;
-  const mv=S.missedMode?"❌ O'tilmaganlar":(MAVZULAR.find(x=>x.id===S.activeMavzu)||{name:''}).name;
-  const nextU=S.questions.findIndex((id,i)=>i>idx&&!S.dotStatus[id]);
-  area.innerHTML=`<div class="q-card">
+  const idx = S.questions.indexOf(qid);
+  const opts = ds.opts||q.o;
+  const mv = S.missedMode ? "❌ O'tilmaganlar" : (MAVZULAR.find(x=>x.id===S.activeMavzu)||{name:''}).name;
+  const nextU = S.questions.findIndex((id,i)=>i>idx&&!S.dotStatus[id]);
+  area.innerHTML = `<div class="q-card">
     <div class="q-head">
       <span class="q-topic">${mv} · #${qid}</span>
       <span class="q-num">${idx+1} / ${S.questions.length}</span>
@@ -560,76 +591,80 @@ function renderReadOnly(qid,ds){
     <div class="q-text">${q.q}</div>
     <div class="opts">${opts.map((o,i)=>{
       let cls='opt';
-      if(i===ds.correctIdx)cls+=' readonly-ok';
-      else if(i===ds.chosenIdx&&ds.chosenIdx!==ds.correctIdx)cls+=' readonly-no';
-      return`<button class="${cls}" disabled><span class="opt-ltr">${L[i]}</span>${o}</button>`;
+      if(i===ds.correctIdx) cls+=' readonly-ok';
+      else if(i===ds.chosenIdx&&ds.chosenIdx!==ds.correctIdx) cls+=' readonly-no';
+      return`<button class="${cls}" disabled><span class="opt-ltr">${L[i]}</span><span>${o}</span></button>`;
     }).join('')}
     </div>
     <div class="fb show ${ds.status==='ok'?'ok':'no'}">
-      <span style="font-size:18px">${ds.status==='ok'?'✅':'❌'}</span>
-      <span>${ds.status==='ok'?"To'g'ri javob bergan edingiz!":`Noto'g'ri. To'g'ri: ${L[ds.correctIdx]}) ${opts[ds.correctIdx]}`}</span>
+      <span style="font-size:20px">${ds.status==='ok'?'✅':'❌'}</span>
+      <span>${ds.status==='ok' ? "To'g'ri javob bergan edingiz!" : `Noto'g'ri. To'g'ri: ${L[ds.correctIdx]}) ${opts[ds.correctIdx]}`}</span>
     </div>
-    <div class="fb show viewed" style="margin-top:6px">
-      <span style="font-size:16px">👁️</span>
+    <div class="fb show viewed" style="margin-top:7px">
+      <span style="font-size:17px">👁️</span>
       <span>Ko'rib chiqish rejimi — allaqachon javoblangan</span>
     </div>
     <div class="q-footer">
-      ${idx>0?`<button class="flag-btn" onclick="jumpTo(${idx-1})">← Oldingi</button>`:'<div></div>'}
+      ${idx>0 ? `<button class="flag-btn" onclick="jumpTo(${idx-1})">← Oldingi</button>` : '<div></div>'}
       ${nextU>=0
-        ?`<button class="next-btn" style="display:block" onclick="jumpTo(${nextU})">Keyingi javobsiz →</button>`
-        :idx<S.questions.length-1
-          ?`<button class="continue-btn" style="display:block" onclick="jumpTo(${idx+1})">Keyingi →</button>`
-          :`<button class="btn-pri" onclick="finishTest()">Natijani ko'rish →</button>`}
+        ? `<button class="next-btn" style="display:block" onclick="jumpTo(${nextU})">Keyingi javobsiz →</button>`
+        : idx<S.questions.length-1
+          ? `<button class="continue-btn" style="display:block" onclick="jumpTo(${idx+1})">Keyingi →</button>`
+          : `<button class="btn-pri" onclick="finishTest()">Natijani ko'rish →</button>`}
     </div>
   </div>`;
 }
-function finishTest(){renderDone(document.getElementById('testArea'));stopCD();}
+function finishTest(){renderDone(document.getElementById('testArea')); stopCD();}
 
+// ── PICK ──
 function pick(i){
-  const ci=_pendingCi,qid=_pendingQid,opts=[..._pendingOpts];
-  const btns=document.querySelectorAll('.opt');
-  if(btns[0].disabled)return;
+  const ci=_pCi, qid=_pQid, opts=[..._pOpts];
+  const btns = document.querySelectorAll('.opt');
+  if(btns[0]&&btns[0].disabled) return;
   btns.forEach(b=>b.disabled=true);
-  const ok=i===ci;
+  const ok = i===ci;
   btns[i].classList.add(ok?'correct':'wrong');
-  if(!ok)btns[ci].classList.add('correct');
-  S.dotStatus[qid]={status:ok?'ok':'no',chosenIdx:i,correctIdx:ci,opts};
-  if(ok){S.correct++;S.history.push({id:qid,correct:true});S.missed=S.missed.filter(x=>x!==qid);
+  if(!ok) btns[ci].classList.add('correct');
+  S.dotStatus[qid] = {status:ok?'ok':'no', chosenIdx:i, correctIdx:ci, opts};
+  if(ok){
+    S.correct++; S.history.push({id:qid,correct:true}); S.missed=S.missed.filter(x=>x!==qid);
     document.getElementById('fb').className='fb show ok';
-    document.getElementById('fb').innerHTML="<span style='font-size:18px'>✅</span><span>To'g'ri! Zo'r!</span>";
-  }else{S.wrong++;S.history.push({id:qid,correct:false});
-    if(!S.missed.includes(qid))S.missed.push(qid);
+    document.getElementById('fb').innerHTML="<span style='font-size:20px'>✅</span><span>To'g'ri! Zo'r!</span>";
+  }else{
+    S.wrong++; S.history.push({id:qid,correct:false});
+    if(!S.missed.includes(qid)) S.missed.push(qid);
     document.getElementById('fb').className='fb show no';
-    document.getElementById('fb').innerHTML=`<span style='font-size:18px'>❌</span><span>Noto'g'ri. To'g'ri: <strong>${['A','B','C','D'][ci]}) ${opts[ci]}</strong></span>`;
+    document.getElementById('fb').innerHTML=`<span style='font-size:20px'>❌</span><span>Noto'g'ri. To'g'ri: <strong>${['A','B','C','D'][ci]}) ${opts[ci]}</strong></span>`;
   }
-  updateStats();save();buildQnav();
+  updateStats(); save(); buildQnav();
   document.getElementById('nxtBtn').style.display='block';
 }
-function nextQ(){S.curIdx++;save();updateProgress();buildQnav();renderQ();}
+function nextQ(){S.curIdx++; save(); updateProgress(); buildQnav(); renderQ();}
 function toggleFlag(qid){
   const idx=S.flagged.indexOf(qid);
-  if(idx>=0)S.flagged.splice(idx,1);else S.flagged.push(qid);
+  if(idx>=0) S.flagged.splice(idx,1); else S.flagged.push(qid);
   save();
   const fl=S.flagged.includes(qid);
   const btn=document.getElementById('flagBtn');
-  if(btn){btn.className='flag-btn'+(fl?' flagged':'');btn.innerHTML=fl?'🚩 Belgilangan':'🏳️ Belgilash';}
+  if(btn){btn.className='flag-btn'+(fl?' flagged':''); btn.innerHTML=fl?'🚩 Belgilangan':'🏳️ Belgilash';}
   showToast(fl?'🚩 Belgilandi':'Belgi olib tashlandi');
 }
 
+// ── DONE ──
 function renderDone(area){
   stopCD();
-  const total=S.questions.length,pct=total>0?Math.round(S.correct/total*100):0;
-  const r=42,c=2*Math.PI*r,d=c*(pct/100);
-  let badge,bc,color;
-  if(pct>=85){badge="A'lo! 🎉";bc="rgba(16,185,129,.15)";color="#10b981";}
-  else if(pct>=70){badge="Yaxshi! 👍";bc="rgba(99,102,241,.15)";color="#818cf8";}
-  else if(pct>=50){badge="O'rtacha 📖";bc="rgba(245,158,11,.15)";color="#f59e0b";}
-  else{badge="Yana mashq kerak 💪";bc="rgba(244,63,94,.15)";color="#f43f5e";}
-  const mc=S.missed.length;
-  area.innerHTML=`<div class="done-card">
+  const total=S.questions.length, pct=total>0?Math.round(S.correct/total*100):0;
+  const r=46, c=2*Math.PI*r, d=c*(pct/100);
+  let badge, bc, color;
+  if(pct>=85){badge="A'lo! 🎉"; bc="rgba(34,197,94,.12)"; color="#22c55e";}
+  else if(pct>=70){badge="Yaxshi! 👍"; bc="rgba(124,106,247,.12)"; color="var(--accent2)";}
+  else if(pct>=50){badge="O'rtacha 📖"; bc="rgba(245,158,11,.12)"; color="#f59e0b";}
+  else{badge="Yana mashq kerak 💪"; bc="rgba(244,63,94,.12)"; color="#f43f5e";}
+  const mc = S.missed.length;
+  area.innerHTML = `<div class="done-card">
     <div class="done-ring">
-      <svg width="120" height="120" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="${r}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="8"/>
+      <svg width="130" height="130" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="${r}" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="8"/>
         <circle cx="50" cy="50" r="${r}" fill="none" stroke="${color}" stroke-width="8"
           stroke-dasharray="${d} ${c}" stroke-linecap="round"/>
       </svg>
@@ -637,62 +672,77 @@ function renderDone(area){
     </div>
     <div class="done-badge" style="background:${bc};color:${color}">${badge}</div>
     <div class="done-title">${S.correct} / ${total} to'g'ri</div>
-    <div class="done-sub">${S.missedMode?"O'tilmaganlar rejimi":"Mavzu"} yakunlandi</div>
+    <div class="done-sub">${S.missedMode ? "O'tilmaganlar rejimi" : "Mavzu"} yakunlandi · ${S.wrong} ta xato</div>
     <div class="done-acts">
       <button class="btn-sec" onclick="showTimeModal(${S.activeMavzu})">🔄 Qayta</button>
-      ${mc>0?`<button class="btn-warn" onclick="showTimeModal(-1)">❌ O'tilmaganlar (${mc})</button>`:''}
-      ${!S.missedMode&&S.activeMavzu<MAVZULAR.length
-        ?`<button class="btn-pri" onclick="showTimeModal(${S.activeMavzu+1})">Keyingi mavzu →</button>`
-        :`<button class="btn-pri" onclick="showTimeModal(1)">Boshidan →</button>`}
+      ${mc>0 ? `<button class="btn-warn" onclick="showTimeModal(-1)">❌ O'tilmaganlar (${mc})</button>` : ''}
+      ${!S.missedMode && S.activeMavzu < MAVZULAR.length
+        ? `<button class="btn-pri" onclick="showTimeModal(${S.activeMavzu+1})">Keyingi mavzu →</button>`
+        : `<button class="btn-pri" onclick="showTimeModal(1)">Boshidan →</button>`}
     </div>
   </div>`;
 }
 
+// ── MISSED TAB ──
 function renderMissedTab(){
-  const area=document.getElementById('missedArea');
+  const area = document.getElementById('missedArea');
   if(!S.missed.length){
-    area.innerHTML=`<div class="missed-empty"><div style="font-size:44px;margin-bottom:10px">🎉</div>
-      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px">Hammasi to'g'ri!</div>
-      <div>Hozircha noto'g'ri savol yo'q</div></div>`;return;
+    area.innerHTML=`<div class="missed-empty">
+      <div style="font-size:52px;margin-bottom:12px">🎉</div>
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px;color:var(--text)">Hammasi to'g'ri!</div>
+      <div>Hozircha noto'g'ri savol yo'q</div>
+    </div>`; return;
   }
-  const qs=S.missed.map(id=>RAW.find(q=>q.id===id)).filter(Boolean);
-  area.innerHTML=`<div class="missed-actions">
+  const qs = S.missed.map(id=>RAW.find(q=>q.id===id)).filter(Boolean);
+  area.innerHTML = `<div class="missed-actions">
     <button class="btn-pri" onclick="showTimeModal(-1)">▶ Qayta ishlash (${S.missed.length})</button>
     <button class="btn-sec" onclick="clearMissed()">🗑️ Tozalash</button>
   </div>
   <div class="missed-list">${qs.map(q=>`<div class="missed-item">
-    <div style="font-size:20px;flex-shrink:0">❌</div>
-    <div><div class="missed-q">${q.q}</div>
-    <div class="missed-meta">Savol #${q.id} · ${MAVZULAR.find(m=>m.id===q.m)?.name||''}</div></div>
+    <div style="font-size:22px;flex-shrink:0">❌</div>
+    <div>
+      <div class="missed-q">${q.q}</div>
+      <div class="missed-meta">Savol #${q.id} · ${MAVZULAR.find(m=>m.id===q.m)?.name||''}</div>
+    </div>
   </div>`).join('')}</div>`;
 }
-function clearMissed(){S.missed=[];save();updateStats();renderMissedTab();showToast('✅ Tozalandi');}
+function clearMissed(){S.missed=[]; save(); updateStats(); renderMissedTab(); showToast('✅ Tozalandi');}
 
+// ── TABS ──
 function switchTab(t){
   currentTab=t;
-  document.getElementById('tab-test').classList.toggle('active',t==='test');
-  document.getElementById('tab-missed').classList.toggle('active',t==='missed');
-  document.getElementById('testArea').style.display=t==='test'?'':'none';
-  document.getElementById('missedArea').style.display=t==='missed'?'':'none';
-  if(t==='missed')renderMissedTab();
+  document.getElementById('tab-test').classList.toggle('active', t==='test');
+  document.getElementById('tab-missed').classList.toggle('active', t==='missed');
+  document.getElementById('testArea').style.display = t==='test' ? '' : 'none';
+  document.getElementById('missedArea').style.display = t==='missed' ? '' : 'none';
+  if(t==='missed') renderMissedTab();
 }
 
+// ── TOAST ──
 let tT;
-function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>el.classList.remove('show'),2200);}
-
-buildMavzuBtns();updateStats();
-if(S.activeMavzu&&S.questions.length>0){
-  show(['progWrap','qnavWrap']);updateProgress();buildQnav();
-  if(S.curIdx<S.questions.length){
-    const qid=S.questions[S.curIdx];
-    if(S.dotStatus[qid])renderReadOnly(qid,S.dotStatus[qid]);else renderQ();
-    showToast('📌 Sessiya tiklandi');showTimeModal(S.activeMavzu);
-  }else{renderDone(document.getElementById('testArea'));}
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(tT); tT=setTimeout(()=>el.classList.remove('show'), 2400);
 }
-window.addEventListener('beforeunload',save);
-setInterval(save,15000);
+
+// ── INIT ──
+buildMavzuBtns(); updateStats();
+if(S.activeMavzu && S.questions.length>0){
+  show(['progWrap','qnavWrap']); updateProgress(); buildQnav();
+  if(S.curIdx < S.questions.length){
+    const qid = S.questions[S.curIdx];
+    if(S.dotStatus[qid]) renderReadOnly(qid, S.dotStatus[qid]); else renderQ();
+    showToast('📌 Sessiya tiklandi'); showTimeModal(S.activeMavzu);
+  } else {
+    renderDone(document.getElementById('testArea'));
+  }
+}
+window.addEventListener('beforeunload', save);
+setInterval(save, 15000);
 </script>
 </body>
 </html>
 ENDOFFILE
-echo "Done! Lines: $(wc -l < /mnt/user-data/outputs/index.html)"
+echo "Done! Lines: $(wc -l < /mnt/user-data/outputs/test.html)"
+echo "Size: $(du -h /mnt/user-data/outputs/test.html)"
